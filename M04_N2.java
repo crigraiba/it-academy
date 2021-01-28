@@ -26,7 +26,7 @@ public class M04_N2 {
 				preu[i] = Double.parseDouble(sc.nextLine()); // preu[i] = sc.nextDouble(); sc.nextLine();
 				menu.put(plat[i], preu[i]);
 			} catch (NumberFormatException e) {
-				System.out.println(e.getClass().getName()+": "+e.getMessage());
+				System.err.println(e.getClass().getName()+": "+e.getMessage());
 				i--;
 			}
 		}
@@ -56,7 +56,7 @@ public class M04_N2 {
 			
 			try {
 				if (!menu.containsKey(nom_plat)) {
-					throw new M04_N3E3("El plat no existeix.");
+					throw new Exception("Aquest plat no existeix.");
 					// Si menu (HashMap) no conté nom_plat (key), es llança una excepció.
 				} else {
 					comanda.add(nom_plat);
@@ -71,13 +71,13 @@ public class M04_N2 {
 						System.out.println(e.getClass().getName()+": "+e.getMessage());
 					} finally {
 						if (resposta != 1 && resposta != 2) {
-							System.out.println("Resposta invàlida.");
+							System.err.println("Resposta invàlida.");
 						}
 					}
 				} while (resposta != 1 && resposta != 2);
 				
 			} catch (Exception e) {
-				System.out.println("Aquest plat no existeix.");
+				System.err.println(e.getMessage());
 			}
 		} while (resposta == 1);
 		
