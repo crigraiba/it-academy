@@ -23,23 +23,20 @@ public class M04_N3 {
 				System.out.print("Plat "+(i+1)+" = ");
 				plat[i] = sc.nextLine().toUpperCase();
 				if (plat[i].isEmpty() || plat[i].isBlank()) {
-					throw new M04_N3E1("El nom del plat no pot estar buit ni estar format per espais en blanc.");
+					throw new M04_N3E1();
 					// Si el nom del plat és un String buit o format per espais en blanc, es llança una excepció.
-				} else if (plat[i].length() <= 3) {
-					throw new M04_N3E2("El nom del plat és massa curt.");
-					// Si la longitud del nom del plat és igual o inferior a 3, es llança una excepció.
+				} else if (plat[i].length() < 2) {
+					throw new M04_N3E2(2);
+					// Si la longitud del nom del plat és inferior a 2, es llança una excepció.
 				}
 				System.out.print("Preu "+(i+1)+" = ");
 				preu[i] = Double.parseDouble(sc.nextLine()); // preu[i] = sc.nextDouble(); sc.nextLine();
 				menu.put(plat[i], preu[i]);
+			} catch (M04_N3E1 | M04_N3E2 e) {
+				System.err.println(e.getMessage());
+				i--;
 			} catch (NumberFormatException e) {
-				System.out.println(e.getClass().getName()+": "+e.getMessage());
-				i--;
-			} catch (M04_N3E1 e) {
-				System.out.println(e.getMessage());
-				i--;
-			} catch (M04_N3E2 e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getClass().getName()+": "+e.getMessage());
 				i--;
 			}
 		}
@@ -69,7 +66,7 @@ public class M04_N3 {
 			
 			try {
 				if (!menu.containsKey(nom_plat)) {
-					throw new M04_N3E3("El plat no existeix.");
+					throw new M04_N3E3();
 					// Si menu (HashMap) no conté nom_plat (key), es llança una excepció.
 				} else {
 					comanda.add(nom_plat);
@@ -81,7 +78,7 @@ public class M04_N3 {
 					try {
 						resposta = Integer.parseInt(sc.nextLine());
 					} catch (NumberFormatException e) {
-						System.out.println(e.getClass().getName()+": "+e.getMessage());
+						System.err.println(e.getClass().getName()+": "+e.getMessage());
 					} finally {
 						if (resposta != 1 && resposta != 2) {
 							System.out.println("Resposta invàlida.");
@@ -90,7 +87,7 @@ public class M04_N3 {
 				} while (resposta != 1 && resposta != 2);
 				
 			} catch (M04_N3E3 e) {
-				System.out.println(e.getMessage());
+				System.err.println(e.getMessage());
 			}
 		} while (resposta == 1);
 		
@@ -149,4 +146,5 @@ public class M04_N3 {
 			System.out.println(b5+" €");
 		}
 	}
+
 }

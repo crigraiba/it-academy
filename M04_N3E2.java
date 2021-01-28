@@ -3,8 +3,10 @@
 
 public class M04_N3E2 extends Exception {
 
-	public M04_N3E2(String msg) {
-		super(msg);
+	private static final long serialVersionUID = 1L;
+
+	public M04_N3E2(int min) {
+		super("El nom és massa curt. Ha de contenir com a mínim "+min+" caràcters.");
 	}
 
 }
