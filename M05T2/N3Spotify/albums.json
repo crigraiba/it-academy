@@ -1,0 +1,7 @@
+[{
+        "_id" : ObjectId("60242c58a02fa93fcc8a6aca"),
+        "artist_id" : ObjectId("60242a50a02fa93fcc8a6ac9"),
+        "title" : "YHLQMDLG",
+        "release_year" : 2020,
+        "cover" : "benito.png"
+}]

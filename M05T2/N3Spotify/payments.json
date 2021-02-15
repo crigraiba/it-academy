@@ -1,0 +1,12 @@
+[{
+        "_id" : ObjectId("602458d17552036078c594a4"),
+        "user_id" : ObjectId("602434cb32cee9f314d1c642"),
+        "date" : ISODate("2020-12-11T00:00:00Z"),
+        "amount" : 5
+},
+{
+        "_id" : ObjectId("602458d17552036078c594a5"),
+        "user_id" : ObjectId("602434cb32cee9f314d1c642"),
+        "date" : ISODate("2021-01-11T00:00:00Z"),
+        "amount" : 5
+}]

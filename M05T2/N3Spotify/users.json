@@ -1,0 +1,17 @@
+[{
+        "_id" : ObjectId("602434cb32cee9f314d1c642"),
+        "username" : "allison",
+        "password" : "allison",
+        "e-mail" : "hola@hola.com",
+        "dob" : ISODate("1999-09-09T00:00:00Z"),
+        "sex" : "F",
+        "zip_code" : 11111,
+        "country" : "Espanya",
+        "premium" : true
+        "favs" : {
+                "album_id" : [
+                        ObjectId("60242c58a02fa93fcc8a6aca")
+                ],
+                "song_id" : null
+        }
+}]

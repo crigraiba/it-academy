@@ -1,0 +1,21 @@
+[{
+        "_id" : ObjectId("60243e6b7552036078c594a3"),
+        "owner_id (user_id)" : ObjectId("602434cb32cee9f314d1c642"),
+        "title" : "aaa",
+        "created_at" : ISODate("2020-11-11T11:01:01Z"),
+        "active" : true,
+        "collaborative" : true,
+        "content" : [
+                {
+                        "song_id" : ObjectId("6024320932cee9f314d1c640"),
+                        "added_at" : ISODate("2020-11-11T11:11:11Z"),
+                        "added_by" : ObjectId("602434cb32cee9f314d1c642")
+                },
+                {
+                        "song_id" : ObjectId("6024320932cee9f314d1c641"),
+                        "added_at" : ISODate("2020-11-11T11:11:11Z"),
+                        "added_by" : ObjectId("602434cb32cee9f314d1c642")
+                }
+        ],
+        "number_of_songs" : 2
+}]

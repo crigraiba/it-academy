@@ -1,0 +1,10 @@
+[{
+        "_id" : ObjectId("60245d5e39ac81c5911c6ea5"),
+        "user_id" : ObjectId("602434cb32cee9f314d1c642"),
+        "first_billing_date" : ISODate("2020-12-11T00:00:00Z"),
+        "next_billing_date" : ISODate("2021-02-11T00:00:00Z"),
+        "payment_details" : {
+                "payment_method" : "PayPal",
+                "paypal_username" : "aaa"
+        }
+}]
