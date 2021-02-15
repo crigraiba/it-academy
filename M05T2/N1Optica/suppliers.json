@@ -1,0 +1,15 @@
+[{
+        "_id" : ObjectId("6023ee6f0d3211931f38764a"),
+        "name" : "Roberto De Luque",
+        "phone_number" : 777777777,
+        "fax" : 777777777,
+        "nif" : "77777777V",
+        "address" : {
+                "street_name" : "aaa",
+                "street_number" : 7,
+                "city" : "Andorra la Vella",
+                "zip_code" : 77777,
+                "country" : "Andorra"
+        },
+        "created_at" : ISODate("2017-07-17T17:07:07Z")
+}]

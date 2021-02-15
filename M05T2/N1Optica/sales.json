@@ -1,0 +1,9 @@
+[{
+        "_id" : ObjectId("602405128c52b077f7895513"),
+        "client_id" : ObjectId("6023eb520d3211931f387648"),
+        "products" : {
+                "seller_id" : ObjectId("602404058c52b077f7895512"),
+		"glasses_id" : ObjectId("6024007b8c52b077f789550f"),
+                "quantity" : 1
+        }
+}]

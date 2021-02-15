@@ -1,0 +1,8 @@
+[{
+        "_id" : ObjectId("6024003e8c52b077f789550e"),
+        "supplier_id" : ObjectId("6023ee6f0d3211931f38764a"),
+        "glasses_id" : [
+                ObjectId("6024007b8c52b077f789550f"),
+                ObjectId("602400eb8c52b077f7895510")
+        ]
+}]

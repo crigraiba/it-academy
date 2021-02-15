@@ -1,0 +1,32 @@
+[{
+        "_id" : ObjectId("6024007b8c52b077f789550f"),
+        "brand_id" : ObjectId("6024003e8c52b077f789550e"),
+        "frame" : {
+                "type" : "Metàl·lica",
+                "color" : "aaa"
+        },
+        "lenses" : {
+                "prescription" : [
+                        0.5,
+                        1
+                ],
+                "color" : "aaa"
+        },
+        "price" : 15
+},
+{
+        "_id" : ObjectId("602400eb8c52b077f7895510"),
+        "brand_id" : ObjectId("6024003e8c52b077f789550e"),
+        "frame" : {
+                "type" : "Flotant",
+                "color" : "aaa"
+        },
+        "lenses" : {
+                "prescription" : [
+                        0.5,
+                        1
+                ],
+                "color" : "aaa"
+        },
+        "price" : 15
+}]

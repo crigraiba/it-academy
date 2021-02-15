@@ -1,0 +1,17 @@
+[{
+        "_id" : ObjectId("6023eb520d3211931f387648"),
+        "name" : "Manolito Gafotas",
+        "phone_number" : 111111111,
+        "e-mail" : "manolito@gafotas.com",
+        "address" : {
+                "street_name" : "aaa",
+                "street_number" : 1,
+                "floor" : 1,
+                "door" : 1,
+                "city" : "aaa",
+                "zip_code" : 11111,
+                "country" : "Espanya"
+        },
+        "recommended_by" : null,
+        "created_at" : ISODate("2021-01-01T00:00:00Z")
+}]
