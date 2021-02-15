@@ -1,0 +1,11 @@
+[{
+        "_id" : ObjectId("60247472eb2a832d542e25c5"),
+        "user_id" : ObjectId("602467dceb2a832d542e25bd"),
+        "title" : "clickbait",
+        "created_at" : ISODate("2021-11-11T11:11:11Z"),
+        "status" : "Públic",
+        "video_id" : [
+                ObjectId("60246fafeb2a832d542e25c1"),
+                ObjectId("60247098eb2a832d542e25c2")
+        ]
+}]

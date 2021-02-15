@@ -1,0 +1,11 @@
+[{
+        "_id" : ObjectId("602467dceb2a832d542e25bd"),
+        "username" : "aaa",
+        "password" : "123",
+        "e-mail" : "fargan@youtube.com",
+        "dob" : ISODate("1999-09-09T00:00:00Z"),
+        "sex" : "M",
+        "zip_code" : 11111,
+        "country" : "Espanya",
+        "subscribed_to" : null
+}]

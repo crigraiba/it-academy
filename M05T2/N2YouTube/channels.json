@@ -1,0 +1,6 @@
+[{
+        "_id" : ObjectId("602469e0eb2a832d542e25be"),
+        "user_id" : ObjectId("602467dceb2a832d542e25bd"),
+        "description" : "jiji jaja",
+        "created_at" : ISODate("2011-11-11T11:11:11Z")
+}]
