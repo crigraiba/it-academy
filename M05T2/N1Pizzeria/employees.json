@@ -1,0 +1,18 @@
+[{
+        "_id" : ObjectId("60240d318db16187e4eae8e2"),
+        "works_at (restaurant_id)" : ObjectId("602413e08db16187e4eae8e7")
+        "name" : "Norman",
+        "last_name" : "Bates",
+        "nif" : "11111111P",
+        "phone_number" : 111111111,
+        "type" : "Cuiner",
+},
+{
+        "_id" : ObjectId("60240d318db16187e4eae8e3"),
+        "works_at (restaurant_id)" : ObjectId("602413e08db16187e4eae8e7")
+        "name" : "Sansa",
+        "last_name" : "Stark",
+        "nif" : "11111111Q",
+        "phone_number" : 111111111,
+        "type" : "Repartidor",
+}]

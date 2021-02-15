@@ -1,0 +1,23 @@
+[{
+        "_id" : ObjectId("602411178db16187e4eae8e4"),
+        "name" : "4 Formaggi",
+        "description" : "Tomàquet, formatge1, formatge2, formatge3 i formatge4.",
+        "img" : "nyam.png",
+        "price" : 10,
+        "type" : "Pizzes",
+        "subtype" : "aaa"
+},
+{
+        "_id" : ObjectId("602411178db16187e4eae8e5"),
+        "name" : "Rodeo",
+        "description" : "aaa bbb vedella ccc",
+        "img" : "yummy.png",
+        "price" : 8.5,
+        "type" : "Hamburgueses"
+},
+{
+        "_id" : ObjectId("602411178db16187e4eae8e6"),
+        "name" : "Coca-cola",
+        "price" : 2,
+        "type" : "Begudes"
+}]

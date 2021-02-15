@@ -1,0 +1,10 @@
+[{
+        "_id" : ObjectId("60241906eb2a832d542e25bb"),
+        "name" : "Aitana",
+        "last_name" : "Ocaña",
+        "phone_number" : 222222222,
+        "address" : "c/ bbb, 2",
+        "zip_code" : 22222,
+        "locality" : "bbb",
+        "province" : "bbb"
+}]

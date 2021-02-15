@@ -1,0 +1,19 @@
+[{
+        "_id" : ObjectId("60241df2eb2a832d542e25bc"),
+        "restaurant_id" : ObjectId("602413e08db16187e4eae8e7"),
+        "client_id" : ObjectId("60241906eb2a832d542e25bb"),
+        "deliver_at" : ISODate("2021-02-10T14:30:00Z"),
+        "products" : [
+                ObjectId("60241f49cb714be88adbe0d4"),
+                ObjectId("602411178db16187e4eae8e6")
+        ],
+        "quantities" : {
+                "pizzas" : "1",
+                "hamburgers" : "0",
+                "beverages" : "1"
+        },
+        "total_price" : 12,
+        "type" : "A domicili",
+        "delivered_at" : ISODate("2021-02-10T14:30:00Z"),
+        "delivered_by" : ObjectId("60240d318db16187e4eae8e3")
+}]
