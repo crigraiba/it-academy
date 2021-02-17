@@ -1,9 +1,9 @@
 
-// PIRÀMIDE INVERTIDA
+package M02; // [Piràmide invertida]
 
 import java.util.Scanner;
 
-public class M02_N2Pyramid {
+public class M02_N2_2 {
 
 	public static void main(String[] args) {
 		System.out.print("Introdueix l'alçada: ");
