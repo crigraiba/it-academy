@@ -1,5 +1,5 @@
 
-// arrayCiutatsModificades: 'a' -> '4'
+package M03.N1; // arrayCiutatsModificades: 'a' -> '4'
 
 import java.util.Scanner;
 import java.util.Arrays;

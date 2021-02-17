@@ -1,5 +1,5 @@
 
-// arrayCiutats
+package M03.N1; // arrayCiutats
 
 import java.util.Scanner;
 import java.util.Arrays;

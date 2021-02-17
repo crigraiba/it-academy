@@ -1,4 +1,6 @@
 
+package M03.N1;
+
 import java.util.Scanner;
 
 public class M03_N1F1 {
