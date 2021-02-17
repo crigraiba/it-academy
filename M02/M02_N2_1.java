@@ -1,9 +1,9 @@
 
-// ESCALA DE NÚMEROS
+package M02; // [Escala de números]
 
 import java.util.Scanner;
 
-public class M02_N2Ladder {
+public class M02_N2_1 {
 
 	public static void main(String[] args) {
 		System.out.print("Introdueix l'alçada: ");
