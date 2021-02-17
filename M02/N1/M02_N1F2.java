@@ -1,5 +1,5 @@
 
-// Llista (List<Character>) i diferenciació entre vocals, consonants i números
+package M02.N1; // Llista (List<Character>) i diferenciació entre vocals, consonants i números
 
 import java.util.List;
 import java.util.ArrayList;

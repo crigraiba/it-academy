@@ -1,5 +1,5 @@
 
-// Taula (char[])
+package M02.N1; // Taula (char[])
 
 public class M02_N1F1 {
 
