@@ -1,5 +1,5 @@
 
-// Control d'excepcions: Creació d'excepcions pròpies
+package M04.N3; // Control d'excepcions: Creació d'excepcions pròpies
 
 import java.util.Scanner;
 import java.util.Map;
@@ -23,16 +23,16 @@ public class M04_N3 {
 				System.out.print("Plat "+(i+1)+" = ");
 				plat[i] = sc.nextLine().toUpperCase();
 				if (plat[i].isEmpty() || plat[i].isBlank()) {
-					throw new M04_N3E1();
+					throw new Exception1();
 					// Si el nom del plat és un String buit o format per espais en blanc, es llança una excepció.
 				} else if (plat[i].length() < 2) {
-					throw new M04_N3E2(2);
+					throw new Exception2(2);
 					// Si la longitud del nom del plat és inferior a 2, es llança una excepció.
 				}
 				System.out.print("Preu "+(i+1)+" = ");
 				preu[i] = Double.parseDouble(sc.nextLine()); // preu[i] = sc.nextDouble(); sc.nextLine();
 				menu.put(plat[i], preu[i]);
-			} catch (M04_N3E1 | M04_N3E2 e) {
+			} catch (Exception1 | Exception2 e) {
 				System.err.println(e.getMessage());
 				i--;
 			} catch (NumberFormatException e) {
@@ -66,7 +66,7 @@ public class M04_N3 {
 			
 			try {
 				if (!menu.containsKey(nom_plat)) {
-					throw new M04_N3E3();
+					throw new Exception3();
 					// Si menu (HashMap) no conté nom_plat (key), es llança una excepció.
 				} else {
 					comanda.add(nom_plat);
@@ -86,7 +86,7 @@ public class M04_N3 {
 					}
 				} while (resposta != 1 && resposta != 2);
 				
-			} catch (M04_N3E3 e) {
+			} catch (Exception3 e) {
 				System.err.println(e.getMessage());
 			}
 		} while (resposta == 1);
