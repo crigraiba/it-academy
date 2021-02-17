@@ -1,4 +1,4 @@
-package M01.N3;
+package M01;
 
 /* Rotar un array sense utilitzar
    un array auxiliar ni llibreries.
