@@ -1,4 +1,6 @@
 
+package M04.N1;
+
 public class M04_N1F1 {
 
 	public static void main(String[] args) {
