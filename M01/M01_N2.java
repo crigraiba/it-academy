@@ -1,4 +1,4 @@
-package M01.N2;
+package M01;
 
 // Type Casting: double -> int, float, String
 
