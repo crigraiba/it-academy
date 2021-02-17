@@ -1,6 +1,5 @@
 
-// SEQÜÈNCIA DE FIBONACCI
-// Concepte de recursivitat
+package M03; // [Seqüència de Fibonacci] Concepte de recursivitat
 
 import java.util.Scanner;
 
@@ -48,4 +47,5 @@ public class M03_N3 {
 			}
 		}
 	}
+	
 }
