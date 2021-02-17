@@ -1,5 +1,5 @@
 
-// Control d'excepcions: Llançament d'excepcions de forma manual
+package M04; // Control d'excepcions: Llançament d'excepcions de forma manual
 
 import java.util.Scanner;
 import java.util.Map;
