@@ -128,7 +128,7 @@ public class PersonMenu {
 	
 	public static int chooseDriver() {
 		System.out.println("CONDUCTOR\n");
-		// TODO if drivers list isEmpty?? preg si vehicleOwner és conductor
+		
 		System.out.println("El titular del vehicle en serà el conductor?\n1. SÍ\n2. NO");
 		
 		response = 0;
@@ -189,4 +189,5 @@ public class PersonMenu {
 	public static void setDriver(Vehicle vehicle) {
 		vehicle.setDriver(driver);
 	}
+	
 }

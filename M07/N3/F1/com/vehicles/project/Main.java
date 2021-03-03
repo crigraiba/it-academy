@@ -3,31 +3,6 @@ package com.vehicles.project;
 import java.util.Scanner;
 
 public class Main {
-	
-	/*
-	 * TODO
-	 * [ ] Llista de persones i de vehicles, quantitat personId i vehicleId ?
-	 * [x] Vehicle -> Afegir camps vehicleOwner i Person[] drivers
-	 * [x] Quan es crea un vehicle -> Afegir el vehicleOwner i tants driver com es vulgui
-	 * [x] Poder crear múltiples persones i vehicles
-	 * [x] Opció finalitzar el programa!
-	 */
-	
-	/*
-	 * TODO
-	 * [x] Afegir personId i vehicleId
-	 * [ ] setDriver, setVehicleOwner
-	 * [ ] Comentaris Main!
-	 */
-	
-	/*
-	 * TODO
-	 * No cal break perquè un vehicle ha de tenir un vehicleOwner i un driver com a mínim.
-	 * Un vehicleOwner pot ser propietari de varios vehicle.
-	 * Un driver pot conduir varios vehicles.
-	 * Primer fer que es crei un únic vehicle amb aquest sistema, després implementar que es puguin crear varios vehicles i varies persones.
-	 * Tractar errors (option, introducció d'una lletra...) i fer bucles a Main.
-	 */
 
 	public static void main(String[] args) {
 		String[] stringArray;
@@ -76,9 +51,8 @@ public class Main {
 			
 			// FASE DE CREACIÓ DELS CONDUCTORS:
 			isDone = false;
-			do {
+			do { // Crea un conductor, que pot ser el propi titular del vehicle:
 				if (vehicle.isDriversEmpty()) {
-					// Crea un conductor, que pot ser el propi titular del vehicle:
 					type = PersonMenu.chooseDriver();
 				} else {
 					do {
