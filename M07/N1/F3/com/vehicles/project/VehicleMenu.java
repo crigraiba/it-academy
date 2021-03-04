@@ -64,7 +64,6 @@ public class VehicleMenu {
 			}
 		} while (num != 4 || (letter != 2 && letter != 3));
 		
-		
 		System.out.print("Marca = ");
 		stringArray[1] = sc.nextLine();
 		System.out.print("Color = ");
