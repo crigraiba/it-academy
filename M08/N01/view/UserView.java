@@ -39,7 +39,7 @@ public class UserView {
 				addVideo(user);
 			} else if (choice == 2) {
 				printVideos(user);
-			} else {
+			} else { // choice == 3
 				finished = true;
 			}
 		} while (finished == false);
