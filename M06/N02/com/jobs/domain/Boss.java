@@ -20,7 +20,7 @@ public class Boss extends AbsStaffMember {
 	
 	// Mètode setter:
 	@Override
-	public void pay() throws Exception{
+	public void pay() throws Exception {
 		totalPaid = paymentRate.pay(salaryPerMonth);
 		
 		// totalPaid < 8000

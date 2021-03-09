@@ -44,7 +44,7 @@ public abstract class AbsStaffMember {
 		return phone;
 	}
 	
-	// Aquest mètode es sobrescriu en totes les subclasses excepte en Volunteer.
+	// Aquest mètode és sobrescrit per totes les subclasses excepte per la subclasse Volunteer
 	public String getTotalPaid() {
 		return "No té salari";
 	}
