@@ -1,6 +1,9 @@
+import java.util.Scanner;
 
 public class Main {
 
+	static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		// Creem dues instàncies de la classe Rocket:
 		Rocket rocket1 = new Rocket("32WESSDS", new int[] {10, 30, 80});
@@ -10,9 +13,30 @@ public class Main {
 		System.out.println(rocket1.getIdentifier() + " (" + rocket1.getNumPropellers() + " propulsors): Potència màxima/W = " + rocket1.getPropellers());
 		System.out.println(rocket2.getIdentifier() + " (" + rocket2.getNumPropellers() + " propulsors): Potència màxima/W = " + rocket2.getPropellers());
 	
-		// Indiquem quina és la potència objectiu de cada propulsor:
-		rocket1.changeSpeed(new int[] {0, 20, 90});
-		rocket2.changeSpeed(new int[] {10, -10, 50, 40, 30, 5});
+		// Comença la carrera de coets!
+		/*boolean finished; // FIXME Carreres infinites + mètode
+		int choice;
+		
+		finished = false;
+		do{*/
+			race(rocket1, rocket2);
+			
+			/*choice = 0;
+			do { // Validació de l'input:
+				System.out.println("Tria una opció:\n1. Crear una nova carrera\n2. Sortir");
+				
+				try {
+					choice = Integer.parseInt(sc.nextLine());
+					
+					if (choice == 2)
+						finished = true;
+				} catch (NumberFormatException e) {
+					System.err.println("Aquesta opció no és vàlida.");
+				}
+			} while (choice != 1 & choice != 2);
+		} while (finished == false);*/
+		
+		sc.close();
 		
 		/*
 		 * TODO
@@ -21,7 +45,10 @@ public class Main {
 		 * thread.start();
 		 * 
 		 * [x] Llançar una excepció si targetPower > maxPower o < 0
-		 * [ ] Indicar a quin cohet i propulsor pertany cada fil
+		 * [ ] Indicar a quin cohet i propulsor pertany cada fil -> i, identifier
+		 * [ ] Quin coet guanya ?
+		 * [x] L'usuari introdueix les potències objectiu
+		 * [ ] Bucle infinit carreres
 		 */
 
 		/*
@@ -30,8 +57,65 @@ public class Main {
 		 * if x < currentPower -> decreasePower
 		 * if x > currentPower -> increasePower
 		 */
+	}
+	
+	public static void race(Rocket rocket1, Rocket rocket2) {
+		String inputString;
+		String[] inputArray;
+		int[] propellersTargetPower1, propellersTargetPower2;
 		
-		// Comença la carrera de coets!
+		propellersTargetPower1 = new int[rocket1.getNumPropellers()];
+		propellersTargetPower2 = new int[rocket2.getNumPropellers()];
+		
+		boolean invalidInput = false;
+		do { // Validació de l'input:
+			try {
+				// Es fan 3 comprovacions:
+				// La quantitat de valors introduïts ha de coincidir amb la quantitat total de propulsors.
+				
+				System.out.println("Introdueix les potències objectiu (en W i separades per comes):");
+				
+				/* 
+				 * Es genera l'exemple en funció del número total de propulsors. Útil si variéssim la
+				 * quantitat de propulsors d'algun dels coets.
+				 */
+				
+				StringBuilder sb = new StringBuilder();
+				for (int i = 0; i < rocket1.getNumPropellers()+rocket2.getNumPropellers(); i++) {
+					sb.append(i+1);
+					
+					if (i < rocket1.getNumPropellers()+rocket2.getNumPropellers()-1)
+						sb.append(","); // Separació entre valors
+				}
+				System.out.println("Per exemple: " + sb.toString());
+				
+				inputString = sc.nextLine();
+				inputArray = inputString.split(",");
+				
+				if (inputArray.length != rocket1.getNumPropellers()+rocket2.getNumPropellers())
+					throw new Exception("Has d'introduir " + (rocket1.getNumPropellers()+rocket2.getNumPropellers()) + " valors.");
+			
+				// Els valors introduïts han de ser números enters.
+				
+				for (int i = 0; i < rocket1.getNumPropellers()+rocket2.getNumPropellers(); i++) {
+					if (i < rocket1.getNumPropellers())
+						propellersTargetPower1[i] = Integer.parseInt(inputArray[i]);
+					else
+						propellersTargetPower2[i-rocket1.getNumPropellers()] = Integer.parseInt(inputArray[i-rocket1.getNumPropellers()]);
+				}
+			
+				// La potència objectiu no pot ser inferior a 0 o superior a la potència màxima del propulsor.
+				
+				rocket1.changeSpeed(propellersTargetPower1);
+				rocket2.changeSpeed(propellersTargetPower2);
+			} catch (NumberFormatException e) {
+				System.err.println("Has d'introduir números enters.");
+				invalidInput = true;
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				invalidInput = true;
+			}
+		} while (invalidInput == true);
 	}
 
 }
@@ -74,22 +158,18 @@ class Rocket {
 	}
 	
 	// Altres mètodes:
-	public void changeSpeed(int[] propellersTargetPower) {
+	public void changeSpeed(int[] propellersTargetPower) throws Exception {
 		for (int i = 0; i < propellers.length; i++) {
-			try {
-				// Es llança una excepció si la potència objectiu no és vàlida:
-				if (propellersTargetPower[i] < 0)
-					throw new Exception("La potència objectiu no pot ser inferior a 0.");
-				else if (propellersTargetPower[i] > propellers[i].getMaxPower())
-					throw new Exception("La potència objectiu no pot ser superior a la potència màxima del propulsor.");
-				
-				if (propellers[i].getCurrentPower() < propellersTargetPower[i])
-					propellers[i].increasePower(propellersTargetPower[i]); // speedUp
-				else if (propellers[i].getCurrentPower() > propellersTargetPower[i])
-					propellers[i].decreasePower(propellersTargetPower[i]); // speedDown
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
+			// Es llança una excepció si la potència objectiu no és vàlida:
+			if (propellersTargetPower[i] < 0)
+				throw new Exception("La potència objectiu no pot ser inferior a 0.");
+			else if (propellersTargetPower[i] > propellers[i].getMaxPower())
+				throw new Exception("La potència objectiu no pot ser superior a la potència màxima del propulsor.");
+			
+			if (propellers[i].getCurrentPower() < propellersTargetPower[i])
+				propellers[i].increasePower(propellersTargetPower[i]); // speedUp
+			else if (propellers[i].getCurrentPower() > propellersTargetPower[i])
+				propellers[i].decreasePower(propellersTargetPower[i]); // speedDown
 		}
 	}
 	
@@ -116,10 +196,12 @@ class Propeller {
 	
 	// Altres mètodes:
 	public void decreasePower(int targetPower) {
-		Thread t = new Thread() {
+		Thread t = new Thread() { // Fil anònim
 			@Override
 			public void run() {
 				while (currentPower > targetPower) {
+					System.out.println(getName() + " Potència/W = " + currentPower);
+					
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -127,8 +209,9 @@ class Propeller {
 					}
 					
 					currentPower--;
-					System.out.println(getName() + " Potència/W = " + currentPower);
 				}
+				
+				System.out.println(getName() + " Potència/W = " + currentPower + " Objectiu assolit");
 			}
 		};
 		
@@ -136,10 +219,12 @@ class Propeller {
 	}
 	
 	public void increasePower(int targetPower) {
-		Thread t = new Thread() {
+		Thread t = new Thread() { // Fil anònim
 			@Override
 			public void run() {
 				while (currentPower < targetPower) {
+					System.out.println(getName() + " Potència/W = " + currentPower);
+					
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -147,10 +232,9 @@ class Propeller {
 					}
 					
 					currentPower++;
-					System.out.println(getName() + " Potència/W = " + currentPower);
 				}
 				
-				System.out.println("El " + getName() + " ha acabat.");
+				System.out.println(getName() + " Potència/W = " + currentPower + " Objectiu assolit");
 			}
 		};
 		
