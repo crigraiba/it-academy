@@ -19,6 +19,7 @@ public class Main {
 		
 		finished = false;
 		do{*/
+			
 			race(rocket1, rocket2);
 			
 			/*choice = 0;
@@ -45,10 +46,10 @@ public class Main {
 		 * thread.start();
 		 * 
 		 * [x] Llançar una excepció si targetPower > maxPower o < 0
-		 * [ ] Indicar a quin cohet i propulsor pertany cada fil -> i, identifier
-		 * [ ] Quin coet guanya ?
+		 * [x] Indicar a quin coet i propulsor pertany cada fil -> i, identifier
+		 * [x] Quin coet guanya ? Més o menys... no ens ho diu un missatge
 		 * [x] L'usuari introdueix les potències objectiu
-		 * [ ] Bucle infinit carreres
+		 * [ ] Bucle infinit carreres - perquè tingui sentit decreasePower
 		 */
 
 		/*
@@ -167,9 +168,9 @@ class Rocket {
 				throw new Exception("La potència objectiu no pot ser superior a la potència màxima del propulsor.");
 			
 			if (propellers[i].getCurrentPower() < propellersTargetPower[i])
-				propellers[i].increasePower(propellersTargetPower[i]); // speedUp
+				propellers[i].increasePower(identifier, i, propellersTargetPower[i]); // speedUp
 			else if (propellers[i].getCurrentPower() > propellersTargetPower[i])
-				propellers[i].decreasePower(propellersTargetPower[i]); // speedDown
+				propellers[i].decreasePower(identifier, i, propellersTargetPower[i]); // speedDown
 		}
 	}
 	
@@ -195,7 +196,7 @@ class Propeller {
 	}
 	
 	// Altres mètodes:
-	public void decreasePower(int targetPower) {
+	public void decreasePower(String identifier, int i, int targetPower) {
 		Thread t = new Thread() { // Fil anònim
 			@Override
 			public void run() {
@@ -215,10 +216,12 @@ class Propeller {
 			}
 		};
 		
+		t.setName(identifier + " Propulsor " + (i+1));
+		
 		t.start();
 	}
 	
-	public void increasePower(int targetPower) {
+	public void increasePower(String identifier, int i, int targetPower) {
 		Thread t = new Thread() { // Fil anònim
 			@Override
 			public void run() {
@@ -237,6 +240,8 @@ class Propeller {
 				System.out.println(getName() + " Potència/W = " + currentPower + " Objectiu assolit");
 			}
 		};
+		
+		t.setName(identifier + " Propulsor " + (i+1));
 		
 		t.start();
 	}
