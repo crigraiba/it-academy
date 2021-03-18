@@ -14,50 +14,9 @@ public class Main {
 		System.out.println(rocket2.getIdentifier() + " (" + rocket2.getNumPropellers() + " propulsors): Potència màxima/W = " + rocket2.getPropellers());
 	
 		// Comença la carrera de coets!
-		/*boolean finished; // FIXME Carreres infinites + mètode
-		int choice;
-		
-		finished = false;
-		do{*/
-			
-			race(rocket1, rocket2);
-			
-			/*choice = 0;
-			do { // Validació de l'input:
-				System.out.println("Tria una opció:\n1. Crear una nova carrera\n2. Sortir");
-				
-				try {
-					choice = Integer.parseInt(sc.nextLine());
-					
-					if (choice == 2)
-						finished = true;
-				} catch (NumberFormatException e) {
-					System.err.println("Aquesta opció no és vàlida.");
-				}
-			} while (choice != 1 & choice != 2);
-		} while (finished == false);*/
+		race(rocket1, rocket2);
 		
 		sc.close();
-		
-		/*
-		 * TODO
-		 * [x] 1 propeller = 1 thread, en total n'han d'haver 9
-		 * Thread thread = new Thread();
-		 * thread.start();
-		 * 
-		 * [x] Llançar una excepció si targetPower > maxPower o < 0
-		 * [x] Indicar a quin coet i propulsor pertany cada fil -> i, identifier
-		 * [x] Quin coet guanya ? Més o menys... no ens ho diu un missatge
-		 * [x] L'usuari introdueix les potències objectiu
-		 * [ ] Bucle infinit carreres - perquè tingui sentit decreasePower
-		 */
-
-		/*
-		 * TODO
-		 * propellersTargetPower = new int[] {x, y, z}
-		 * if x < currentPower -> decreasePower
-		 * if x > currentPower -> increasePower
-		 */
 	}
 	
 	public static void race(Rocket rocket1, Rocket rocket2) {
@@ -75,11 +34,6 @@ public class Main {
 				// La quantitat de valors introduïts ha de coincidir amb la quantitat total de propulsors.
 				
 				System.out.println("Introdueix les potències objectiu (en W i separades per comes):");
-				
-				/* 
-				 * Es genera l'exemple en funció del número total de propulsors. Útil si variéssim la
-				 * quantitat de propulsors d'algun dels coets.
-				 */
 				
 				StringBuilder sb = new StringBuilder();
 				for (int i = 0; i < rocket1.getNumPropellers()+rocket2.getNumPropellers(); i++) {
