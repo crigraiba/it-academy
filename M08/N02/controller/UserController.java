@@ -17,8 +17,8 @@ public class UserController {
 		UserService.addVideo(user, URL, title, tagsList, uploadDateTime);
 	}
 	
-	public static void printVideos(User user) {
-		UserService.printVideos(user);
+	public static void printVideos(User user, LocalDateTime currentDateTime) {
+		UserService.printVideos(user, currentDateTime);
 	}
 	
 }

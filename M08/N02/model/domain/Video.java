@@ -10,6 +10,11 @@ public class Video {
 	private String URL, title;
 	private List<String> tagsList;
 	private LocalDateTime uploadDateTime;
+	private EUploadStatus uploadStatus;
+	
+	private enum EUploadStatus {
+		UPLOADING, VERIFYING, PUBLIC
+	}
 	
 	// Mètode constructor:
 	public Video() {
@@ -33,6 +38,21 @@ public class Video {
 		this.uploadDateTime = uploadDateTime;
 	}
 	
+	public void setUploadStatus(LocalDateTime currentDateTime) {
+		long timePassed;
+			
+		// Càlcul del temps transcorregut entre uploadDateTime i currentDateTime:
+		timePassed = uploadDateTime.until(currentDateTime, ChronoUnit.SECONDS);
+		
+		if (timePassed < 30) {
+			this.uploadStatus = EUploadStatus.UPLOADING;
+		} else if (timePassed > 30 && timePassed < 60) {
+			this.uploadStatus = EUploadStatus.VERIFYING;
+		} else { // timePassed > 60
+			this.uploadStatus = EUploadStatus.PUBLIC;
+		}
+	}
+	
 	// Mètodes getters:
 	public String getURL() {
 		return URL;
@@ -50,25 +70,8 @@ public class Video {
 		return uploadDateTime;
 	}
 	
-	public String getUploadStatus(LocalDateTime currentDateTime) {
-		long timePassed;
-		
-		// Càlcul del temps transcorregut entre uploadDateTime i currentDateTime:
-		timePassed = uploadDateTime.until(currentDateTime, ChronoUnit.SECONDS);
-		
-		if (timePassed < 30) {
-			return EUploadStatuses.UPLOADING.name();
-		} else if (timePassed > 30 && timePassed < 60) {
-			return EUploadStatuses.VERIFYING.name();
-		} else { // timePassed > 60
-			return EUploadStatuses.PUBLIC.name();
-		}
-	}
-	
-	private enum EUploadStatuses {
-		UPLOADING,
-		VERIFYING,
-		PUBLIC
+	public String getUploadStatus() {
+		return uploadStatus.name();
 	}
 	
 }

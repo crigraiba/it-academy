@@ -2,8 +2,8 @@ package model.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import model.domain.User;
 import model.domain.Video;
@@ -38,9 +38,9 @@ public class UserService {
 	}
 	
 	// Opció 2 del menú:
-	public static void printVideos(User user) {
+	public static void printVideos(User user, LocalDateTime currentDateTime) {
 		System.out.println("Usuari:\n[Nom = " + user.getName() + ", Cognoms = " + user.getLastName() + ", Password = " + user.getPassword() + ", Data de registre = " + user.getRegistrationDate() + "]"
-						+ "\nLlista de vídeos:" + user.getVideosList());
+						+ "\nLlista de vídeos:" + user.getVideosList(currentDateTime));
 	}
 	
 }

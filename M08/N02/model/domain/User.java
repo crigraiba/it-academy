@@ -54,11 +54,13 @@ public class User {
 		videosList.add(video);
 	}
 	
-	public String getVideosList() {
+	public String getVideosList(LocalDateTime currentDateTime) {
 		StringBuilder sb = new StringBuilder();
 		
 		for (Video video : videosList) {
-			sb.append("\n[URL = " + video.getURL() + ", Títol = " + video.getTitle() + ", Tags = " + video.getTagsList() + ", Data i hora de pujada = " + video.getUploadDateTime() + ", Estat de pujada = " + video.getUploadStatus(LocalDateTime.now()) + "]");
+			video.setUploadStatus(currentDateTime);
+			
+			sb.append("\n[URL = " + video.getURL() + ", Títol = " + video.getTitle() + ", Tags = " + video.getTagsList() + ", Data i hora de pujada = " + video.getUploadDateTime() + ", Estat de pujada = " + video.getUploadStatus() + "]");
 		}
 		
 		return sb.toString();

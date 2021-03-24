@@ -32,9 +32,9 @@ public class UserView {
 				} catch (NumberFormatException e) {
 					System.err.println("Introdueix una opció vàlida.");
 				}
-				
-				System.out.print("\n"); // Separació
 			} while (choice < 1 || choice > 3);
+			
+			System.out.print("\n"); // Separació
 			
 			if (choice == 1) {
 				addVideo(user);
@@ -93,7 +93,7 @@ public class UserView {
 	
 	// Opció 2 del menú:
 	private static void printVideos(User user) {
-		UserController.printVideos(user);
+		UserController.printVideos(user, LocalDateTime.now());
 		
 		System.out.print("\n"); // Separació
 	}
