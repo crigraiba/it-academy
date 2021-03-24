@@ -1,8 +1,8 @@
 package model.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import model.domain.User;
 import model.domain.Video;

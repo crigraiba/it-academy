@@ -13,7 +13,7 @@ public class Main {
 		 * Lògica de l'aplicació:
 		 * - A UserView es demana a l'usuari que introdueixi totes les dades i se'n fan les validacions pertinents.
 		 * - UserController connecta UserView amb UserService.
-		 * - A UserService es creen instancies d'User i Video, les quals s'emmagatzemen en llistes. 
+		 * - A UserService es creen instàncies d'User i Video, les quals s'emmagatzemen en llistes. 
 		 */
 		
 	}
