@@ -101,6 +101,7 @@ public class Video {
 	}
 	
 	// Opció 3 del menú:
+	boolean paused;
 	public void play(LocalDateTime currentDateTime) throws Exception {
 		/*setUploadStatus(currentDateTime);
 		
@@ -119,7 +120,18 @@ public class Video {
 					}
 					
 					progress = progress.plusSeconds(1);
+					
+					synchronized (this) {
+						while (paused) {
+							try {
+								this.wait();
+							} catch (InterruptedException e) {
+								e.printStackTrace(); // FIXME
+							}
+						}
+					}
 				}
+				System.out.println("Reproducció finalitzada.");
 			}
 		};
 		
@@ -133,46 +145,44 @@ public class Video {
 		choices[1] = "Tria una opció:\n1. Reproduir\n2. Parar";
 		
 		int choice, i = 0;
-		boolean asleep = false;
 		
-		while (t.isAlive()) {
+		while (t.isAlive()) { // FIXME
 			choice = UserController.requestAction(choices[i]);
 
-			if (i == 0 && choice == 1) {
-				asleep = true;
+			if (choice == 1) {
+				switch (i) {
+					case 0: // Pause
+						paused = true;
+						System.out.println(t.getState() + " El vídeo s'ha pausat. " + progress);
+						i = 1;
+						break;
+					case 1: // Play
+						paused = false;
+						System.out.println(t.getState() + " El vídeo s'està reproduint. " + progress);
+						i = 0;
+				}
 				
-				System.out.println("El vídeo s'ha pausat."); // Pause
-				
-				// i = 1;
+				synchronized (t) {
+					t.notify();
+				}
 			}
-			
-			if (i == 1 && choice == 1) {
-				asleep = false;
-				
-				System.out.println("El vídeo s'està reproduint."); // Play
-				
-				// i = 0;
-			}
-			
-			System.out.println("Abans de synchronized");
-			
-			synchronized (t) {
-				System.out.println("Abans de wait");
-				
-				while (asleep) // FIXME bucle infinit
-					t.wait();
-
-				System.out.println("Després de wait");
-				t.notify();
-			}
-			
-			System.out.println("Després de synchronized");
-			
+			/*
+			 * TODO
+			 * [ ] Mai surt d'aquest bucle. Això passa perquè no es completa l'iteració, 
+			 * 	   l'escàner queda a l'espera i no introduïm mai cap més número...
+			 * 	   Modificar synchronized bloc ? no... sc.close() ? consumir línea ? catch excepció escàner aqui
+			 * 	   close no perquè puc voler tornar a reproduir el vídeo...
+			 * [ ] Parar if (choice == 2) { interrupt() } ? no... perquè no mor el fil... break perquè surti
+			 * 	   del bucle ? exit ??
+			 * [ ] paused com a variable de classe sí o sí ?? no pot estar dins del mètode ? :(
+			 * [ ] TIMED-WAITING vs WAITING primer segon 1
+			 * [ ] EStatus set i get
+			 */
 		}
 		
-		System.out.print("\n"); // Separació
+		System.out.println("Sortida bucle t.isAlive"); // TODO mai arriba aquí
 		
-		System.out.println(t.getState() + " Progrés = " + progress + " Reproducció finalitzada." + getStatus());
+		System.out.print("\n"); // Separació
 	}
 	
 }
