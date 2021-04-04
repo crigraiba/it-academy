@@ -1,4 +1,3 @@
-
 // Expressions lambda i interfícies funcionals
 
 public class M10_N01_F02 {
@@ -13,7 +12,7 @@ public class M10_N01_F02 {
 	
 }
 
-@FunctionalInterface //Interfície funcional:
+@FunctionalInterface // Interfície funcional:
 interface Pi {
 	
 	// Únic mètode abstracte:
