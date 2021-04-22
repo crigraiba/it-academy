@@ -1,3 +1,8 @@
 *.class
 *.classpath
 *.project
+
+# Gradle
+.gradle
+.settings
+build/
