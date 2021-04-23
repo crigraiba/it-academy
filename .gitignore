@@ -2,7 +2,20 @@
 *.classpath
 *.project
 
+# Maven
+.mvn
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 # Gradle
 .gradle
-.settings
 build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+.settings
+HELP.md
+**/.gitignore
