@@ -1,0 +1,17 @@
+USE dbsegundo;
+
+SELECT
+	EMPNO,
+	DEPTNO,
+	ENAME,
+	JOB,
+	MGR,
+	HIREDATE,
+	SAL,
+	COMM
+FROM
+	empleados
+HAVING
+	JOB IN('CLERK')
+ORDER BY
+	ENAME;

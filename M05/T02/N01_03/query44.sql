@@ -1,0 +1,9 @@
+USE dbsegundo;
+
+SELECT
+	ENAME,
+	JOB
+FROM
+	empleados
+WHERE
+	CONCAT(ENAME, JOB) REGEXP '^A.*MAN$';

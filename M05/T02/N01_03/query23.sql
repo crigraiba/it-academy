@@ -1,0 +1,9 @@
+USE dbsegundo;
+
+SELECT
+	ENAME
+FROM
+	empleados
+WHERE
+	COMM IS NULL
+	OR COMM <= 0.25*SAL;

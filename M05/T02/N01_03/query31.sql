@@ -1,0 +1,8 @@
+USE dbsegundo;
+
+SELECT
+	(COMM/SAL)*100 AS PORCENTAJE
+FROM
+	empleados
+ORDER BY
+	ENAME;

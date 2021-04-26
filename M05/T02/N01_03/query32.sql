@@ -1,0 +1,9 @@
+USE dbsegundo;
+
+SELECT
+	ENAME
+FROM
+	empleados
+WHERE
+	DEPTNO = 10
+	AND ENAME NOT LIKE '%LA%';

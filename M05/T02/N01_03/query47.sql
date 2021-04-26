@@ -1,0 +1,9 @@
+USE dbsegundo;
+
+SELECT
+	ENAME,
+	HIREDATE
+FROM
+	empleados
+WHERE
+	JOB != 'SALESMAN';

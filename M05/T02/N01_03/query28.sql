@@ -1,0 +1,12 @@
+USE dbsegundo;
+
+SELECT
+	SAL,
+	COMM,
+	SAL AS SALARIO_TOTAL
+FROM
+	empleados
+WHERE
+	COMM IS NULL
+ORDER BY
+	EMPNO;

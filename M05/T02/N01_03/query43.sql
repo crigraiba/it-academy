@@ -1,0 +1,10 @@
+USE dbsegundo;
+
+SELECT
+	ENAME,
+	JOB
+FROM
+	empleados
+WHERE
+	JOB REGEXP '.*MAN$'
+	AND ENAME REGEXP '^A.*';

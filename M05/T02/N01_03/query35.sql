@@ -1,0 +1,13 @@
+USE dbsegundo;
+
+SELECT
+	ENAME,
+	DEPTNO
+FROM
+	empleados
+WHERE
+	JOB = 'CLERK'
+	AND DEPTNO != 10
+	AND SAL > 800
+ORDER BY
+	HIREDATE;

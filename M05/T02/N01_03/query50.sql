@@ -1,0 +1,12 @@
+USE dbsegundo;
+
+SELECT
+	ENAME
+FROM
+	empleados
+WHERE
+	MGR > EMPNO
+	AND (
+		SAL BETWEEN 1000 AND 2000
+		OR DEPTNO = 30
+	);
