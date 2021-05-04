@@ -13,7 +13,7 @@ public class Video {
 		this.tagsList = new ArrayList<>();
 	}
 	
-	// Mètodes setters:
+	// Mètodes setter:
 	public void setURL(String URL) {
 		this.URL = URL;
 	}
@@ -26,7 +26,7 @@ public class Video {
 		this.tagsList = tagsList;
 	}
 	
-	// Mètodes getters:
+	// Mètodes getter:
 	public String getURL() {
 		return URL;
 	}
@@ -37,6 +37,12 @@ public class Video {
 	
 	public List<String> getTagsList() {
 		return tagsList;
+	}
+	
+	// Altres mètodes:
+	@Override
+	public String toString() {
+		return "[URL = " + URL + ", Títol = " + title + ", Tags = " + tagsList + "]";
 	}
 	
 }
