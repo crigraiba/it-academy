@@ -36,8 +36,8 @@ public class UserController {
 		}
 	}
 	
-	public static int requestAction(Thread t, String choices) {
-		return UserView.buttons(t, choices);
+	public static int requestAction(String choices) {
+		return UserView.buttons(choices);
 	}
 	
 }

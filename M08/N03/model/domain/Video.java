@@ -157,21 +157,21 @@ public class Video {
 		
 		int choice, i = 0;
 		while (t.isAlive()) {
-			choice = UserController.requestAction(t, choices[i]);
+			choice = UserController.requestAction(choices[i]);
 			
 			if (choice == 1) {
 				switch (i) {
 					case 0: // Pause
 						paused = true;
+						i = 1;
 						setStatus(EStatus.PAUSED);
 						System.out.println("El vídeo s'ha pausat.");
-						i = 1;
 						break;
 					case 1: // Play
 						paused = false;
+						i = 0;
 						setStatus(EStatus.PLAYING);
 						System.out.println("El vídeo s'està reproduint.");
-						i = 0;
 				}
 				
 				synchronized (t) {

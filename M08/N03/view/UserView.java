@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.ArrayList;
 
 import model.domain.User;
 import controller.UserController;
@@ -119,7 +118,7 @@ public class UserView {
 		System.out.println(); // Separació
 	}
 	
-	public static int buttons(Thread t, String choices) {
+	public static int buttons(String choices) {
 		int choice = 0;
 		do {
 			try {
