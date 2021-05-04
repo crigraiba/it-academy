@@ -41,15 +41,20 @@ public class UserService {
 	
 	// Opció 2 del menú:
 	public static void printVideos(User user, LocalDateTime currentDateTime) {
-		System.out.println("Usuari:\n[Nom = " + user.getName() + ", Cognoms = " + user.getLastName() + ", Password = " + user.getPassword() + ", Data de registre = " + user.getRegistrationDate() + "]"
-						+ "\nLlista de vídeos:" + user.getVideosList(currentDateTime));
+		for (Video video : user.getVideosList())
+			video.setUploadStatus(currentDateTime);
+		
+		System.out.println(user.toString());
 	}
 	
 	// Opció 3 del menú:
-	public static Video retrieveVideo(User user, String title) {
-		Video video = user.retrieveVideo(title);
+	public static Video retrieveVideo(User user, String title) throws Exception {
+		for (Video video : user.getVideosList()) {
+			if (title.equals(video.getTitle()))
+				return video;
+		}
 		
-		return video;
+		throw new Exception("Aquest vídeo no existeix.");
 	}
 	
 }

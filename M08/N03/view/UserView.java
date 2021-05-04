@@ -1,10 +1,11 @@
 package view;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -18,12 +19,9 @@ public class UserView {
 	public static void menu() {
 		User user = addUser();
 		
-		boolean finished;
 		int choice;
-		
-		finished = false;
 		do {
-			System.out.println("Tria una opció:\n1. Afegir un vídeo\n2. Llistar tots els vídeos\n3. Reproduir un vídeo\n4. Sortir");
+			System.out.println("Tria una opció:\n1. Afegir un vídeo\n2. Llistar tots els vídeos\n3. Reproduir un vídeo\n4. Sortir de l'aplicació");
 			
 			choice = 0;
 			do {
@@ -36,7 +34,7 @@ public class UserView {
 				}
 			} while (choice < 1 || choice > 4);
 			
-			System.out.print("\n"); // Separació
+			System.out.println(); // Separació
 			
 			if (choice == 1) {
 				addVideo(user);
@@ -44,15 +42,12 @@ public class UserView {
 				printVideos(user);
 			} else if (choice == 3) {
 				mediaPlayer(user);
-			} else { // choice == 4
-				finished = true;
 			}
-		} while (finished == false);
+		} while (choice != 4);
 		
 		sc.close();
 		
 		System.out.println("Aplicació finalitzada.");
-		
 	}
 	
 	private static User addUser() {
@@ -65,7 +60,7 @@ public class UserView {
 		System.out.print("Password = ");
 		password = input();
 		
-		System.out.print("\n"); // Separació
+		System.out.println(); // Separació
 		
 		return UserController.addUser(name, lastName, password, LocalDate.now());
 	}
@@ -85,7 +80,7 @@ public class UserView {
 			try {
 				duration = LocalTime.parse(input());
 			} catch (DateTimeParseException e) {
-				System.err.println("El format de la durada ha de ser HH:MM:SS.");
+				System.err.println("El format de la durada ha de ser HH:mm:ss.");
 				duration = null;
 			}
 		} while (duration == null);
@@ -94,22 +89,22 @@ public class UserView {
 			try {
 				tagsString = input();
 				tagsList = splitTagsString(tagsString);
-			} catch (RuntimeException e) {
-				System.err.println("El vídeo ha de contenir com a mínim 1 tag.");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
 				tagsList = null;
 			}
 		} while (tagsList == null);
 		
 		UserController.addVideo(user, URL, title, duration, tagsList, LocalDateTime.now());
 		
-		System.out.print("\n"); // Separació
+		System.out.println(); // Separació
 	}
 	
 	// Opció 2 del menú:
 	private static void printVideos(User user) {
 		UserController.printVideos(user, LocalDateTime.now());
 		
-		System.out.print("\n"); // Separació
+		System.out.println(); // Separació
 	}
 	
 	// Opció 3 del menú:
@@ -121,48 +116,49 @@ public class UserView {
 		
 		UserController.playVideo(user, title, LocalDateTime.now());
 		
-		System.out.print("\n"); // Separació
+		System.out.println(); // Separació
 	}
 	
-	public static int buttons(String choices) {
-		int choice;
-		
-		System.out.println(choices);
-		
-		choice = 0;
+	public static int buttons(Thread t, String choices) {
+		int choice = 0;
 		do {
 			try {
-				choice = Integer.parseInt(input());
-				if (choice < 1 || choice > 3)
+				choice = Integer.valueOf(JOptionPane.showInputDialog(null, choices));
+				if (choice != 1 && choice != 2)
 					throw new NumberFormatException();
 			} catch (NumberFormatException e) {
 				System.err.println("Introdueix una opció vàlida.");
 			}
-		} while (choice < 1 || choice > 3);
+		} while (choice != 1 && choice != 2);
 		
 		return choice;
 	}
 	
+	// Introducció de l'input:
 	private static String input() {
 		String input;
 		
 		do { // Validació de l'input:
 			input = sc.nextLine();
-			if (input == null || input.isEmpty() || input.isBlank())
-				System.err.println("Aquest camp no pot estar buit.");
+			try {
+				if (input == null || input.isEmpty() || input.isBlank())
+					throw new Exception("Aquest camp no pot estar buit.");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 		} while (input == null || input.isEmpty() || input.isBlank());
 		
 		return input;
 	}
 	
 	// Converteix tagsString en tagsArray i, posteriorment, en tagsList
-	private static List<String> splitTagsString(String tagsString) throws RuntimeException {
+	private static List<String> splitTagsString(String tagsString) throws Exception {
 		String[] tagsArray;
 		List<String> tagsList = new ArrayList<>();
 		
 		tagsArray = tagsString.split(",");
 		
-		// Construcció de tagsListt:
+		// Construcció de tagsList:
 		for (String tag : tagsArray) {
 			// tag == null || tag.isEmpty() || tag.isBlank()
 			if (tag != null && !tag.isEmpty() && !tag.isBlank()) {
@@ -173,7 +169,7 @@ public class UserView {
 		
 		// Validació de tagsList:
 		if (tagsList.size() == 0)
-			throw new RuntimeException();
+			throw new Exception("El vídeo ha de contenir com a mínim 1 tag.");
 		
 		return tagsList;
 	}

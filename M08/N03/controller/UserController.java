@@ -28,17 +28,16 @@ public class UserController {
 		try { // Validació del vídeo:
 			Video video = UserService.retrieveVideo(user, title);
 			
-			if (video == null)
-				throw new Exception("Aquest vídeo no existeix.");
+			video.setUploadStatus(currentDateTime);
 			
-			video.play(currentDateTime);
+			video.play();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
-	public static int requestAction(String choices) {
-		return UserView.buttons(choices);
+	public static int requestAction(Thread t, String choices) {
+		return UserView.buttons(t, choices);
 	}
 	
 }

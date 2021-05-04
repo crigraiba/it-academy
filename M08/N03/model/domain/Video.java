@@ -1,13 +1,13 @@
 package model.domain;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.ArrayList;
 
 import controller.UserController;
-
-import java.util.ArrayList;
 
 public class Video {
 	
@@ -20,6 +20,7 @@ public class Video {
 	
 	private enum EUploadStatus {
 		UPLOADING, VERIFYING, PUBLIC
+		// < 10 s, 10-20 s, > 20 s
 	}
 	
 	private enum EStatus {
@@ -31,7 +32,7 @@ public class Video {
 		this.tagsList = new ArrayList<>();
 	}
 	
-	// Mètodes setters:
+	// Mètodes setter:
 	public void setURL(String URL) {
 		this.URL = URL;
 	}
@@ -60,7 +61,7 @@ public class Video {
 		
 		if (timePassed < 10) {
 			this.uploadStatus = EUploadStatus.UPLOADING;
-		} else if (timePassed > 10 && timePassed < 20) {
+		} else if (timePassed >= 10 && timePassed <= 20) {
 			this.uploadStatus = EUploadStatus.VERIFYING;
 		} else { // timePassed > 20
 			this.uploadStatus = EUploadStatus.PUBLIC;
@@ -71,7 +72,7 @@ public class Video {
 		this.status = status;
 	}
 	
-	// Mètodes getters:
+	// Mètodes getter:
 	public String getURL() {
 		return URL;
 	}
@@ -100,44 +101,54 @@ public class Video {
 		return status.name();
 	}
 	
+	// Altres mètodes:
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+		
+		return "[URL = " + URL + ", Títol = " + title + ", Tags = " + tagsList +
+			", Data i hora de pujada = " + uploadDateTime.format(formatter) +
+			", Estat de pujada = " + uploadStatus + "]";
+	}
+	
 	// Opció 3 del menú:
 	boolean paused;
-	public void play(LocalDateTime currentDateTime) throws Exception {
-		/*setUploadStatus(currentDateTime);
-		
+	public void play() throws Exception {
 		if (!uploadStatus.equals(EUploadStatus.PUBLIC))
-			throw new Exception("Aquest vídeo encara no és públic.");*/
+			throw new Exception("Aquest vídeo encara no és públic.");
 		
+		// Simula la reproducció del vídeo:
 		Thread t = new Thread() {
 			@Override
 			public void run() {
-				while (progress.compareTo(duration) < 0) {
-					try {
+				try {
+					while (!progress.equals(duration)) {
 						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						System.out.println("S'ha interromput el vídeo.");
-						progress = duration;
-					}
-					
-					progress = progress.plusSeconds(1);
-					
-					synchronized (this) {
-						while (paused) {
-							try {
+						
+						progress = progress.plusSeconds(1);
+						
+						synchronized (this) {
+							while (paused)
 								this.wait();
-							} catch (InterruptedException e) {
-								e.printStackTrace(); // FIXME
-							}
 						}
 					}
+				} catch (InterruptedException e) { // Stop
+					progress = LocalTime.parse("00:00:00");
+					return;
+				} finally {
+					setStatus(EStatus.STOPPED);
+					System.out.println("El vídeo s'ha parat.");
+					
+					System.out.println(getStatus() + " Temps de reproducció = " + progress);
 				}
-				System.out.println("Reproducció finalitzada.");
+				
+				System.out.println("El vídeo s'ha acabat de reproduir.");
 			}
 		};
 		
 		// Comença a reproduir-se el vídeo:
 		t.start();
-		System.out.println("El vídeo s'està reproduint.");
+		System.out.println("\nEl vídeo s'ha començat a reproduir.");
 		
 		// L'usuari pot pausar/continuar reproduint o parar el vídeo en qualsevol moment durant la seva reproducció:
 		String[] choices = new String[2];
@@ -145,44 +156,34 @@ public class Video {
 		choices[1] = "Tria una opció:\n1. Reproduir\n2. Parar";
 		
 		int choice, i = 0;
-		
-		while (t.isAlive()) { // FIXME
-			choice = UserController.requestAction(choices[i]);
-
+		while (t.isAlive()) {
+			choice = UserController.requestAction(t, choices[i]);
+			
 			if (choice == 1) {
 				switch (i) {
 					case 0: // Pause
 						paused = true;
-						System.out.println(t.getState() + " El vídeo s'ha pausat. " + progress);
+						setStatus(EStatus.PAUSED);
+						System.out.println("El vídeo s'ha pausat.");
 						i = 1;
 						break;
 					case 1: // Play
 						paused = false;
-						System.out.println(t.getState() + " El vídeo s'està reproduint. " + progress);
+						setStatus(EStatus.PLAYING);
+						System.out.println("El vídeo s'està reproduint.");
 						i = 0;
 				}
 				
 				synchronized (t) {
 					t.notify();
+					System.out.println(getStatus() + " Temps de reproducció = " + progress);
 				}
+			} else { // choice = 2
+				t.interrupt();
+				t.join();
+				return;
 			}
-			/*
-			 * TODO
-			 * [ ] Mai surt d'aquest bucle. Això passa perquè no es completa l'iteració, 
-			 * 	   l'escàner queda a l'espera i no introduïm mai cap més número...
-			 * 	   Modificar synchronized bloc ? no... sc.close() ? consumir línea ? catch excepció escàner aqui
-			 * 	   close no perquè puc voler tornar a reproduir el vídeo...
-			 * [ ] Parar if (choice == 2) { interrupt() } ? no... perquè no mor el fil... break perquè surti
-			 * 	   del bucle ? exit ??
-			 * [ ] paused com a variable de classe sí o sí ?? no pot estar dins del mètode ? :(
-			 * [ ] TIMED-WAITING vs WAITING primer segon 1
-			 * [ ] EStatus set i get
-			 */
 		}
-		
-		System.out.println("Sortida bucle t.isAlive"); // TODO mai arriba aquí
-		
-		System.out.print("\n"); // Separació
 	}
 	
 }
