@@ -1,6 +1,7 @@
 package model.domain;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Video {
 	
 	private enum EUploadStatus {
 		UPLOADING, VERIFYING, PUBLIC
+		// < 30 s, 30-60 s, > 60 s
 	}
 	
 	// Mètode constructor:
@@ -21,7 +23,7 @@ public class Video {
 		this.tagsList = new ArrayList<>();
 	}
 	
-	// Mètodes setters:
+	// Mètodes setter:
 	public void setURL(String URL) {
 		this.URL = URL;
 	}
@@ -46,14 +48,14 @@ public class Video {
 		
 		if (timePassed < 30) {
 			this.uploadStatus = EUploadStatus.UPLOADING;
-		} else if (timePassed > 30 && timePassed < 60) {
+		} else if (timePassed >= 30 && timePassed <= 60) {
 			this.uploadStatus = EUploadStatus.VERIFYING;
 		} else { // timePassed > 60
 			this.uploadStatus = EUploadStatus.PUBLIC;
 		}
 	}
 	
-	// Mètodes getters:
+	// Mètodes getter:
 	public String getURL() {
 		return URL;
 	}
@@ -72,6 +74,16 @@ public class Video {
 	
 	public String getUploadStatus() {
 		return uploadStatus.name();
+	}
+	
+	// Altres mètodes:
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+		
+		return "[URL = " + URL + ", Títol = " + title + ", Tags = " + tagsList +
+			", Data i hora de pujada = " + uploadDateTime.format(formatter) +
+			", Estat de pujada = " + uploadStatus + "]";
 	}
 	
 }

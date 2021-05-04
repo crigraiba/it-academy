@@ -39,8 +39,10 @@ public class UserService {
 	
 	// Opció 2 del menú:
 	public static void printVideos(User user, LocalDateTime currentDateTime) {
-		System.out.println("Usuari:\n[Nom = " + user.getName() + ", Cognoms = " + user.getLastName() + ", Password = " + user.getPassword() + ", Data de registre = " + user.getRegistrationDate() + "]"
-						+ "\nLlista de vídeos:" + user.getVideosList(currentDateTime));
+		for (Video video : user.getVideosList())
+			video.setUploadStatus(currentDateTime);
+		
+		System.out.println(user.toString());
 	}
 	
 }

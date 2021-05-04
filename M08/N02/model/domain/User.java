@@ -1,7 +1,7 @@
 package model.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class User {
 		this.videosList = new ArrayList<>();
 	}
 	
-	// Mètodes setters:
+	// Mètodes setter:
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -33,7 +33,7 @@ public class User {
 		this.registrationDate = registrationDate;
 	}
 	
-	// Mètodes getters:
+	// Mètodes getter:
 	public String getName() {
 		return name;
 	}
@@ -50,20 +50,29 @@ public class User {
 		return registrationDate;
 	}
 	
-	public void addVideo(Video video) {
-		videosList.add(video);
+	public List<Video> getVideosList() {
+		return videosList;
 	}
 	
-	public String getVideosList(LocalDateTime currentDateTime) {
+	// Altres mètodes:
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		
 		StringBuilder sb = new StringBuilder();
 		
+		sb.append("Vídeos:");
+		
 		for (Video video : videosList) {
-			video.setUploadStatus(currentDateTime);
-			
-			sb.append("\n[URL = " + video.getURL() + ", Títol = " + video.getTitle() + ", Tags = " + video.getTagsList() + ", Data i hora de pujada = " + video.getUploadDateTime() + ", Estat de pujada = " + video.getUploadStatus() + "]");
+			sb.append("\n\t" + video.toString());
 		}
 		
-		return sb.toString();
+		return "Usuari:\nNom = " + name + "\nCognoms = " + lastName + "\nPassword = " + password +
+			"\nData de registre = " + registrationDate.format(formatter) + "\n" + sb.toString();
+	}
+	
+	public void addVideo(Video video) {
+		videosList.add(video);
 	}
 	
 }
