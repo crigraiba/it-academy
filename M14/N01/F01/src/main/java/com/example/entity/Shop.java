@@ -27,11 +27,6 @@ public class Shop {
 	public Shop() {
 	}
 	
-	public Shop(String name, int capacity) {
-		this.name = name;
-		this.capacity = capacity;
-	}
-	
 	// Mètodes setter:
 	public void setName(String name) {
 		this.name = name;

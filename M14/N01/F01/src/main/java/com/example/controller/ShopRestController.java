@@ -24,7 +24,10 @@ public class ShopRestController {
 	
 	@PostMapping("/") // POST /shops/ Crear Shop
 	public ResponseEntity<Shop> create() {
-		Shop shop = new Shop("shop", 1);
+		Shop shop = new Shop();
+		
+		shop.setName("exemple");
+		shop.setCapacity(5);
 		
 		return ResponseEntity.ok(shopRepository.save(shop));
 	}
