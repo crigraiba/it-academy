@@ -13,10 +13,10 @@ Conceptes bàsics de la programació: tipus de dades, variables i constants, est
 
 | Mòdul | Nivell | Fase | |
 | :---: | :---: | :---: | :--- |
-| [01](https://github.com/crigraiba/it-academy/tree/master/M01) | 01<br/>02<br/>03 | |
-| [02](https://github.com/crigraiba/it-academy/tree/master/M02) | 01<br/>02<br/><sub>ESCALA DE NÚMEROS</sub><br/><sup>PIRÀMIDE INVERTIDA</sup><br/>03<br/><sub>RELLOTGE DIGITAL</sub> | | |
-| [03](https://github.com/crigraiba/it-academy/tree/master/M03) | 01<br/>02<br/>03<br/><sub>SEQÜÈNCIA DE FIBONACCI</sub> | |
-| [04](https://github.com/crigraiba/it-academy/tree/master/M04) | 01<br/>02<br/>03 | | `Excepcions`<br/>Control d'excepcions.<br/>Creació d'excepcions personalitzades. |
+| [01](https://github.com/crigraiba/it-academy/tree/master/M01) | [01](https://github.com/crigraiba/it-academy/tree/master/M01/N01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M01/N02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M01/N03) | [01-04](https://github.com/crigraiba/it-academy/tree/master/M01/N01/F01_04)<br/><br/><br/> |
+| [02](https://github.com/crigraiba/it-academy/tree/master/M02) | [01](https://github.com/crigraiba/it-academy/tree/master/M02/N01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M02/N02)<br/><sub>ESCALA DE NÚMEROS</sub><br/><sup>PIRÀMIDE INVERTIDA</sup><br/>[03](https://github.com/crigraiba/it-academy/tree/master/M02/N03)<br/><sub>RELLOTGE DIGITAL</sub> | [01-04](https://github.com/crigraiba/it-academy/tree/master/M02/N01/F01_04)<br/>[01-02](https://github.com/crigraiba/it-academy/tree/master/M02/N02/F01_02)<br/><br/><br/><br/><br/> | |
+| [03](https://github.com/crigraiba/it-academy/tree/master/M03) | [01](https://github.com/crigraiba/it-academy/tree/master/M03/N01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M03/N02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M03/N03)<br/><sub>SEQÜÈNCIA DE FIBONACCI</sub> | [01-04](https://github.com/crigraiba/it-academy/tree/master/M03/N01/F01_04)<br/><br/><br/><br/> |
+| [04](https://github.com/crigraiba/it-academy/tree/master/M04) | [01](https://github.com/crigraiba/it-academy/tree/master/M04/N01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M04/N02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M04/N03) | [01-03](https://github.com/crigraiba/it-academy/tree/master/M04/N01/F01_03)<br/><br/><br/> | `Excepcions`<br/>Control d'excepcions.<br/>Creació d'excepcions personalitzades. |
 
 ### Bases de dades
 
@@ -26,7 +26,7 @@ Modelatge i gestió de bases de dades relacionals i no relacionals amb MySQL i M
 
 | Mòdul | Tasca | Nivell | Fase |
 | :---: | :---: | :---: | :---: |
-| [05](https://github.com/crigraiba/it-academy/tree/master/M05) | [01](https://github.com/crigraiba/it-academy/tree/master/M05/T01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M05/T02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M05/T03)<br/>[04](https://github.com/crigraiba/it-academy/tree/master/M05/T04)<br/> | <br/>[01-03](https://github.com/crigraiba/it-academy/tree/master/M05/T02/N01_03)<br/><br/><br/>| |
+| [05](https://github.com/crigraiba/it-academy/tree/master/M05) | [01](https://github.com/crigraiba/it-academy/tree/master/M05/T01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M05/T02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M05/T03)<br/><br/><br/><br/>[04](https://github.com/crigraiba/it-academy/tree/master/M05/T04)<br/> | [01-03](https://github.com/crigraiba/it-academy/tree/master/M05/T01/N01_03)<br/>[01-03](https://github.com/crigraiba/it-academy/tree/master/M05/T02/N01_03)<br/>[01](https://github.com/crigraiba/it-academy/tree/master/M05/T03/N01)<br/><br/>[02](https://github.com/crigraiba/it-academy/tree/master/M05/T03/N02)<br/>[03](https://github.com/crigraiba/it-academy/tree/master/M05/T03/N03)<br/>[01-03](https://github.com/crigraiba/it-academy/tree/master/M05/T04/N01_03) | <br/>[01](https://github.com/crigraiba/it-academy/tree/master/M05/T03/N03/F01)<br/>[02](https://github.com/crigraiba/it-academy/tree/master/M05/T03/N03/F02)<br/><br/><br/> |
 
 ### Programació orientada a objectes
 
