@@ -4,6 +4,6 @@ import springBootInitialDemo.dto.ResponseDto;
 
 public interface IRepository {
 	
-    public ResponseDto getUser(String uuid);
-    
+	public ResponseDto getUser(String uuid);
+	
 }

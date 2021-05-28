@@ -17,128 +17,128 @@ import java.util.Optional;
 @Repository
 @Transactional
 public class UserRepository implements IRepository, JpaRepository {
+	
+	@Autowired
+	private UserResponseDto userResponseDto;
+	
+	public UserResponseDto getUser(String uuid) {
+		userResponseDto.setName("Jonatan");
+		userResponseDto.setSurname("Vicente");
+		userResponseDto.setGender("Male");
+		return userResponseDto;
+	}
+	
+	@Override
+	public List<ResponseDto> findAll() {
+		return null;
+	}
 
-    @Autowired
-    private UserResponseDto userResponseDto;
-
-    public UserResponseDto getUser(String uuid) {
-        userResponseDto.setName("Jonatan");
-        userResponseDto.setSurname("Vicente");
-        userResponseDto.setGender("Male");
-        return userResponseDto;
-    }
-
-    @Override
-    public List<ResponseDto> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<ResponseDto> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public List<ResponseDto> findAllById(Iterable iterable) {
-        return null;
-    }
-
-    @Override
-    public List<ResponseDto> saveAll(Iterable entities) {
-        return null;
-    }
-
-    @Override
-    public void flush() {
-    }
-
-    @Override
-    public Object saveAndFlush(Object entity) {
-        return null;
-    }
-
-    @Override
-    public void deleteInBatch(Iterable entities) {
-    }
-
-    @Override
-    public void deleteAllInBatch() {
-    }
-
-    @Override
-    public Object getOne(Object o) {
-        return null;
-    }
-
-    @Override
-    public List<ResponseDto> findAll(Example example) {
-        return null;
-    }
-
-    @Override
-    public List<ResponseDto> findAll(Example example, Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page findAll(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Object save(Object entity) {
-        return null;
-    }
-
-    @Override
-    public Optional<ResponseDto> findById(Object o) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(Object o) {
-        return false;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Object o) {
-    }
-
-    @Override
-    public void delete(Object entity) {
-    }
-
-    @Override
-    public void deleteAll(Iterable entities) {
-    }
-
-    @Override
-    public void deleteAll() {
-    }
-
-    @Override
-    public Optional<ResponseDto> findOne(Example example) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Page<ResponseDto> findAll(Example example, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public long count(Example example) {
-        return 0;
-    }
-
-    @Override
-    public boolean exists(Example example) {
-        return false;
-    }
-    
+	@Override
+	public List<ResponseDto> findAll(Sort sort) {
+		return null;
+	}
+	
+	@Override
+	public List<ResponseDto> findAllById(Iterable iterable) {
+		return null;
+	}
+	
+	@Override
+	public List<ResponseDto> saveAll(Iterable entities) {
+		return null;
+	}
+	
+	@Override
+	public void flush() {
+	}
+	
+	@Override
+	public Object saveAndFlush(Object entity) {
+		return null;
+	}
+	
+	@Override
+	public void deleteInBatch(Iterable entities) {
+	}
+	
+	@Override
+	public void deleteAllInBatch() {
+	}
+	
+	@Override
+	public Object getOne(Object o) {
+		return null;
+	}
+	
+	@Override
+	public List<ResponseDto> findAll(Example example) {
+		return null;
+	}
+	
+	@Override
+	public List<ResponseDto> findAll(Example example, Sort sort) {
+		return null;
+	}
+	
+	@Override
+	public Page findAll(Pageable pageable) {
+		return null;
+	}
+	
+	@Override
+	public Object save(Object entity) {
+		return null;
+	}
+	
+	@Override
+	public Optional<ResponseDto> findById(Object o) {
+		return Optional.empty();
+	}
+	
+	@Override
+	public boolean existsById(Object o) {
+		return false;
+	}
+	
+	@Override
+	public long count() {
+		return 0;
+	}
+	
+	@Override
+	public void deleteById(Object o) {
+	}
+	
+	@Override
+	public void delete(Object entity) {
+	}
+	
+	@Override
+	public void deleteAll(Iterable entities) {
+	}
+	
+	@Override
+	public void deleteAll() {
+	}
+	
+	@Override
+	public Optional<ResponseDto> findOne(Example example) {
+		return Optional.empty();
+	}
+	
+	@Override
+	public Page<ResponseDto> findAll(Example example, Pageable pageable) {
+		return null;
+	}
+	
+	@Override
+	public long count(Example example) {
+		return 0;
+	}
+	
+	@Override
+	public boolean exists(Example example) {
+		return false;
+	}
+	
 }

@@ -8,16 +8,16 @@ import springBootInitialDemo.service.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService {
-
-    private final UserRepository userRepository;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
-
-    public UserResponseDto getUser(String uuid){
-        return userRepository.getUser(uuid);
-    }
-
+	
+	private final UserRepository userRepository;
+	
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
+	public UserResponseDto getUser(String uuid) {
+		return userRepository.getUser(uuid);
+	}
+	
 }

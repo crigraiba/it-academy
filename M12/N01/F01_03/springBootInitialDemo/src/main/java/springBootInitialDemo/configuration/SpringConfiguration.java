@@ -13,22 +13,22 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 @EnableAsync
 public class SpringConfiguration {
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Bean
-    public ClientHttpRequestFactory getClientHttpRequestFactory() {
-        SimpleClientHttpRequestFactory ret = new SimpleClientHttpRequestFactory();
-        ret.setReadTimeout(10000); // 10 sec
-        return ret;
-    }
-
-    @Bean
-    public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
-        return new RestTemplate(clientHttpRequestFactory);
-    }
-
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
+	@Bean
+	public ClientHttpRequestFactory getClientHttpRequestFactory() {
+		SimpleClientHttpRequestFactory ret = new SimpleClientHttpRequestFactory();
+		ret.setReadTimeout(10000); // 10 sec
+		return ret;
+	}
+	
+	@Bean
+	public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
+		return new RestTemplate(clientHttpRequestFactory);
+	}
+	
 }
