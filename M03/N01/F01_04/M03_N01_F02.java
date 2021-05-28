@@ -1,9 +1,9 @@
-
-package M03.N1;
+// arrayCiutats
 
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class M03_N1F1 {
+public class M03_N01_F02 {
 
 	public static void main(String[] args) {
 		String c1, c2, c3, c4, c5, c6;
@@ -23,8 +23,15 @@ public class M03_N1F1 {
 		System.out.print("6 = ");
 		c6 = sc.nextLine();
 		sc.close();
+				
+		String[] arrayCiutats = {c1, c2, c3, c4, c5, c6};
 		
-		System.out.print(c1+"\n"+c2+"\n"+c3+"\n"+c4+"\n"+c5+"\n"+c6);
+		Arrays.sort(arrayCiutats);
+		
+		System.out.println("\nOrdre alfabètic:");
+		for (String ciutat : arrayCiutats) {
+			System.out.println(ciutat);
+		}
 	}
 
 }

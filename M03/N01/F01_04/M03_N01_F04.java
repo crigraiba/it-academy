@@ -1,10 +1,9 @@
-
-package M03.N1; // Barcelona -> anolecraB
+// Barcelona -> anolecraB
 
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class M03_N1F4 {
+public class M03_N01_F04 {
 
 	public static void main(String[] args) {
 		String c1, c2, c3, c4, c5, c6;
