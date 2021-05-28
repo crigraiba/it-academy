@@ -1,5 +1,4 @@
-
-package M04; // Control d'excepcions: Llançament d'excepcions de forma manual
+// Control d'excepcions: Llançament d'excepcions de forma manual
 
 import java.util.Scanner;
 import java.util.Map;
@@ -7,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class M04_N2 {
+public class M04_N02 {
 
 	public static void main(String[] args) {
 		// Introducció de plats i preus al menú:
