@@ -1,7 +1,6 @@
+// [Rellotge digital]
 
-package M02; // [Rellotge digital]
-
-public class M02_N3 {
+public class M02_N03 {
 
 	public static void main(String[] args) {
 		
