@@ -1,7 +1,6 @@
+// Taula (char[])
 
-package M02.N1; // Taula (char[])
-
-public class M02_N1F1 {
+public class M02_N01_F01 {
 
 	public static void main(String[] args) {
 		char[] charArray = { 'C', 'R', 'I', 'S', 'T', 'I', 'N', 'A' };

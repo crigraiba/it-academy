@@ -1,10 +1,9 @@
-
-package M02.N1; // Llista (List<Character>) i diferenciació entre vocals, consonants i números
+// Llista (List<Character>) i diferenciació entre vocals, consonants i números
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class M02_N1F2 {
+public class M02_N01_F02 {
 
 	public static void main(String[] args) {
 		char[] charArray = { 'C', 'R', 'I', 'S', 'T', 'I', 'N', 'A' };

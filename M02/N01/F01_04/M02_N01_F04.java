@@ -1,12 +1,11 @@
-
-package M02.N1; // Mapa (Map<Character, Integer>)
+// fullName = name + surname
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class M02_N1F3 {
+public class M02_N01_F04 {
 
 	public static void main(String[] args) {
 		char[] charArray = { 'C', 'R', 'I', 'S', 'T', 'I', 'N', 'A' };
@@ -48,6 +47,18 @@ public class M02_N1F3 {
 			}
 		}
 		System.out.println(charHashMap);
+		
+		List<Character> name = charArrayList;
+		List<Character> surname = new ArrayList<>();
+		List<Character> fullName = new ArrayList<>();
+		surname.add('G');
+		surname.add('R');
+		surname.add('A');
+		surname.add('U');
+		fullName.addAll(name);
+		fullName.add(' ');
+		fullName.addAll(surname);
+		System.out.print(fullName);
 	}
 
 }
