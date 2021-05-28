@@ -1,10 +1,8 @@
-package M01;
-
 /* Rotar un array sense utilitzar
    un array auxiliar ni llibreries.
 */
 
-public class M01_N3 {
+public class M01_N03 {
 
 	public static void main(String[] args) {
 		
