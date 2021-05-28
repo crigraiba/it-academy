@@ -1,5 +1,4 @@
-
-package M04.N3; // Excepció pròpia 3: Revisió de comanda
+// Excepció pròpia 3: Revisió de comanda
 
 public class Exception3 extends Exception {
 	

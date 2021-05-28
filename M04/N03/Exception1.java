@@ -1,5 +1,4 @@
-
-package M04.N3; // Excepció pròpia 1: Revisió de tipus
+// Excepció pròpia 1: Revisió de tipus
 
 public class Exception1 extends Exception {
 	

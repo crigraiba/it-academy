@@ -1,5 +1,4 @@
-
-package M04.N3; // Excepció pròpia 2: Introducció de plats
+// Excepció pròpia 2: Introducció de plats
 
 public class Exception2 extends Exception {
 
