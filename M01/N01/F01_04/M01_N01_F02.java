@@ -1,8 +1,6 @@
-package M01.N1;
-
 // ANYS DE TRASPÀS entre 1948 i 1994
 
-public class M01_N1F2 {
+public class M01_N01_F02 {
 
 	public static void main(String[] args) {
 		final int LEAPYEAR = 1948;

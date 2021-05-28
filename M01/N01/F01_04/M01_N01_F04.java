@@ -1,6 +1,5 @@
-package M01.N1;
 
-public class M01_N1F4 {
+public class M01_N01_F04 {
 
 	public static void main(String[] args) {		
 		String nom = "Cristina", cognom1 = "Grau", cognom2 = "Ibáñez";

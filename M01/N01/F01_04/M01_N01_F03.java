@@ -1,6 +1,5 @@
-package M01.N1;
 
-public class M01_N1F3 {
+public class M01_N01_F03 {
 
 	public static void main(String[] args) {
 		
