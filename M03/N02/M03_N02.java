@@ -1,9 +1,6 @@
-
-package M03;
-
 import java.util.Scanner;
 
-public class M03_N2 {
+public class M03_N02 {
 
 	public static void main(String[] args) {
 		double[][] notesAlumnes = new double[5][3];
