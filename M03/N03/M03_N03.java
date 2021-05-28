@@ -1,9 +1,8 @@
-
-package M03; // [Seqüència de Fibonacci] Concepte de recursivitat
+// [Seqüència de Fibonacci] Concepte de recursivitat
 
 import java.util.Scanner;
 
-public class M03_N3 {
+public class M03_N03 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
