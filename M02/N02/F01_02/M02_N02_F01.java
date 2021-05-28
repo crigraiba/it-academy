@@ -1,9 +1,8 @@
-
-package M02; // [Piràmide invertida]
+// [Escala de números]
 
 import java.util.Scanner;
 
-public class M02_N2_2 {
+public class M02_N02_F01 {
 
 	public static void main(String[] args) {
 		System.out.print("Introdueix l'alçada: ");
@@ -11,18 +10,12 @@ public class M02_N2_2 {
 		int height = input.nextInt();
 		input.close();
 		
-		int total = 0;
-		for (int step = height*2-1; step >= 1; step -= 2) {
-			for (int whitespace = 0; whitespace != total; whitespace++) {
-				System.out.print(" ");
-			}
-			total++;
-			
+		for (int step = 1; step <= height; step++) {
 			for (int num = 1; num <= step; num++) {
-				System.out.print("*");
+				System.out.print(num);
 			}
 			System.out.print("\n");
-		}
+		} // num < step	System.out.println(step);
 	}
 
 }
