@@ -1,8 +1,6 @@
-package M01;
-
 // Type Casting: double -> int, float, String
 
-public class M01_N2 {
+public class M01_N02 {
 
 	public static void main(String[] args) {
 		double numDouble = 0.1234;
