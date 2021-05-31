@@ -1,0 +1,19 @@
+-- Creació de les taules:
+DROP TABLE IF EXISTS pictures;
+DROP TABLE IF EXISTS shops;
+
+CREATE TABLE shops (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	capacity INT NOT NULL
+);
+
+CREATE TABLE pictures (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	author VARCHAR(50),
+	price DOUBLE NOT NULL,
+	datetime DATETIME DEFAULT CURRENT_TIMESTAMP,
+	shop_id INT NOT NULL,
+	FOREIGN KEY (shop_id)
+		REFERENCES shops(id)
+);
