@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<meta charset="ISO-8859-1">
+	<title>API Empleats</title>
+</head>
+<body>
+	<!-- Taula -->
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom</th>
+				<th>Feina</th>
+				<th>Salari</th>
+				<th colspan="2"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${employee.id}"></td>
+				<td th:text="${employee.name}"></td>
+				<td th:text="${employee.job}"></td>
+				<td th:text="${employee.salary}"></td>
+				
+				<td><button id="delete-btn">Esborrar</button></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<!-- Formulari -->
+	<form th:action="@{/employees}">
+		<p>
+			<label for="name">Nom:</label>
+			<input type="text" id="name" name="name" />
+			
+			<label for="job">Feina:</label>
+			<input type="text" id="job" name="job" />
+			
+			<button type="submit" id="update-btn">Actualitzar</button>
+		</p>
+	</form>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var url = window.location.href;
+			
+			$("#delete-btn").click(function () {
+				$.ajax({
+					url: url,
+					method: "DELETE",
+					success: function () {
+						console.log("L'empleat s'ha esborrat correctament.");
+					},
+					error: function (error) {
+						console.log(error);
+					}
+				});
+			});
+			
+			$("#update-btn").click(function () {
+				$.ajax({
+					url: url,
+					method: "PUT",
+					success: function() {
+						console.log("L'empleat s'ha actualitzat correctament.");
+					},
+					error: function(error) {
+						console.log(error);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
