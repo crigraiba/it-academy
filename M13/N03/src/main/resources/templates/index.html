@@ -5,6 +5,34 @@
 	<title>API Empleats</title>
 </head>
 <body>
+	<h1>Empleats</h1>
+	
+	<!-- Formularis -->
+	<form th:action="@{/employees}" method="post">
+		<p>
+			<label for="name">Nom:</label>
+			<input type="text" id="name" name="name" />
+			
+			<label for="job">Feina:</label>
+			<select id="job" name="job">
+				<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}" />
+			</select>
+			
+			<input type="submit" value="Afegir">
+		</p>
+	</form>
+	
+	<form th:action="@{/employees}" method="get">
+			<p>
+				<label for="job">Feina:</label>
+				<select id="job" name="job">
+					<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}" />
+				</select>
+				
+				<input type="submit" value="Filtrar">
+			</p>
+	</form>
+	
 	<!-- Taula -->
 	<table border="1">
 		<thead>
@@ -26,18 +54,5 @@
 			</tr>
 		</tbody>
 	</table>
-	
-	<!-- Formulari -->
-	<form th:action="@{/employees}" method="post">
-		<p>
-			<label for="name">Nom:</label>
-			<input type="text" id="name" name="name" />
-			
-			<label for="job">Feina:</label>
-			<input type="text" id="job" name="job" />
-			
-			<input type="submit" value="Afegir">
-		</p>
-	</form>
 </body>
 </html>

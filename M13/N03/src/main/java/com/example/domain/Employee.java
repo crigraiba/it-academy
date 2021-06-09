@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "employees")
@@ -16,8 +15,6 @@ public class Employee {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Transient
-	private static int count = 1;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "job")
@@ -27,13 +24,6 @@ public class Employee {
 	
 	// Mètodes constructors:
 	public Employee() {
-	}
-	
-	public Employee(String name, EJob job) {
-		//this.id = count++;
-		this.name = name;
-		this.job = job.name();
-		this.salary = job.getSalary();
 	}
 	
 	public Employee(int id, String name, String job, double salary) {

@@ -58,12 +58,11 @@ public class MySqlJdbcEmployeeRepository {
 	
 	// Creació:
 	public void create(Employee employee) throws SQLException {
-		String query = "INSERT INTO employees (name, job, salary)"//id, name, job, salary)\"
+		String query = "INSERT INTO employees (name, job, salary)"
 			+ " VALUES (?, ?, ?)";
 			
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-		//preparedStatement.setInt(1, employee.getId());
+		
 		preparedStatement.setString(1, employee.getName());
 		preparedStatement.setString(2, employee.getJob());
 		preparedStatement.setDouble(3, employee.getSalary());

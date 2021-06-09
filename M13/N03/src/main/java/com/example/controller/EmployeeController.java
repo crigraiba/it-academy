@@ -1,12 +1,12 @@
 package com.example.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,13 +27,14 @@ import com.example.domain.Employee;
 import com.example.domain.EJob;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/employees")
 public class EmployeeController {
 	
-	// InMemoryEmployeeRepository repository = new InMemoryEmployeeRepository();
+	InMemoryEmployeeRepository repository = new InMemoryEmployeeRepository();
 	// MySqlJdbcEmployeeRepository repository = new MySqlJdbcEmployeeRepository();
-	@Autowired
-	MySqlJpaEmployeeService repository;
+	// @Autowired
+	// MySqlJpaEmployeeService repository;
 	
 	// Lectura:
 	@GetMapping
@@ -52,7 +53,12 @@ public class EmployeeController {
 	
 	// Creació:
 	@PostMapping
-	public String create(Model model, @Valid Employee form) throws SQLException {
+	public String create(Model model, @Valid Employee employee) throws SQLException {
+		employee.setSalary(EJob.valueOf(employee.getJob()).getSalary());
+		repository.create(employee);
+		return "redirect:/employees";
+	}
+	/*public String create(Model model, @Valid Employee form) throws SQLException {
 		String name = form.getName();
 		EJob job = EJob.valueOf(form.getJob());
 		
@@ -67,7 +73,7 @@ public class EmployeeController {
 		System.out.println(employee.toString());
 		
 		return "redirect:/employees";
-	}
+	}*/
 	
 	// Eliminació:
 	@DeleteMapping("/{id}")
