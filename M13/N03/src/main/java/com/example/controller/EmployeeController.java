@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 
 import com.example.repository.InMemoryEmployeeRepository;
@@ -29,7 +31,7 @@ import com.example.domain.Employee;
 import com.example.domain.EJob;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8080", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:8080")//, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/employees")
 public class EmployeeController {
 	
@@ -46,7 +48,6 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/{id}")
-	//@ResponseBody
 	public String readById(Model model, @PathVariable int id) throws SQLException {
 		model.addAttribute("employees", repository.read());
 		model.addAttribute("employee", repository.readById(id));
@@ -67,12 +68,14 @@ public class EmployeeController {
 	public void delete(Model model, @PathVariable int id) throws SQLException {
 		repository.delete(id);
 	}
-		
+	
 	// Actualització:
 	@PutMapping("/{id}")
 	@ResponseBody
-	public void update(Model model, @PathVariable int id, @Valid @RequestParam String name, @Valid @RequestParam String job) throws SQLException {
-		System.out.println(id + " " + name + " " + job);
+	public String update(Model model, @PathVariable int id, @Valid Employee employee) {//Map<String, String> json) throws SQLException {
+		System.out.println(id + " " + employee.getName() + " " + employee.getJob());
+		//System.out.println(id + " " + name + " " + job);
+		//System.out.println(id + " " + json.get("name") + " " + json.get("job"));
 		//new Employee(name, job).setId(id);
 		/*System.out.println(employee.toString());
 		
@@ -82,7 +85,7 @@ public class EmployeeController {
 		System.out.println(employee.toString());
 		
 		repository.update(employee);*/
-		//return "redirect:/employees";
+		return "redirect:/employees";
 	}
 	
 	// Filtratge:
