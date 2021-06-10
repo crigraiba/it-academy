@@ -1,58 +1,113 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/crud.js}"></script>
+    
 	<meta charset="ISO-8859-1">
-	<title>API Empleats</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>API REST</title>
 </head>
 <body>
-	<h1>Empleats</h1>
-	
-	<!-- Formularis -->
-	<form th:action="@{/employees}" method="post">
-		<p>
-			<label for="name">Nom:</label>
-			<input type="text" id="name" name="name" />
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Empleats</h1>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<!-- Taula -->
+				<table class="table table-hover shadow-lg p-3 mb-5 bg-body rounded">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Nom</th>
+							<th scope="col">Feina</th>
+							<th scope="col">Salari</th>
+							<th scope="col" colspan="1"></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr th:if="${employees.empty}">
+							<th scope="row" colspan="5">Cap resultat.</th>
+						</tr>
+						
+						<tr th:each="employee : ${employees}">
+							<th scope="row" th:text="${employee.id}"></th>
+							<td th:text="${employee.name}"></td>
+							<td th:text="${employee.job}"></td>
+							<td th:text="${employee.salary}"></td>
+							<td><a th:href="@{/employees/} + ${employee.id}">Editar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			
-			<label for="job">Feina:</label>
-			<select id="job" name="job">
-				<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}" />
-			</select>
-			
-			<input type="submit" value="Afegir">
-		</p>
-	</form>
-	
-	<form th:action="@{/employees}" method="get">
-			<p>
-				<label for="job">Feina:</label>
-				<select id="job" name="job">
-					<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}" />
-				</select>
+			<div class="col">
+				<p>
+					<a class="btn btn-primary" href="/employees" role="button">Tots els resultats</a>
+				</p>
 				
-				<input type="submit" value="Filtrar">
-			</p>
-	</form>
-	
-	<!-- Taula -->
-	<table border="1">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nom</th>
-				<th>Feina</th>
-				<th>Salari</th>
-				<th colspan="1"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="employee : ${employees}">
-				<td th:text="${employee.id}"></td>
-				<td th:text="${employee.name}"></td>
-				<td th:text="${employee.job}"></td>
-				<td th:text="${employee.salary}"></td>
-				<td><a th:href="@{/employees/} + ${employee.id}">Editar</a></td>
-			</tr>
-		</tbody>
-	</table>
+				<!-- Formularis -->
+				<form th:if="${employee == null}"
+					th:action="@{/employees}" method="post">
+					<fieldset>
+						<legend>Nou empleat</legend>
+						<p>
+							<label for="name">Nom:</label>
+							<input type="text" id="name" name="name">
+							
+							<label for="job">Feina:</label>
+							<select id="job" name="job">
+								<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}">
+							</select>
+							
+							<input type="submit" class="btn btn-outline-primary" value="Afegir">
+						</p>
+					</fieldset>
+				</form>
+				 
+				<form th:if="${employee == null}"
+					th:action="@{/employees}" method="get">
+					<fieldset>
+						<legend>Filtratge</legend>
+						<p>
+							<label for="job">Feina:</label>
+							<select id="job" name="job">
+								<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}"
+										th:value="${job}"></option>
+							</select>
+							
+							<input type="submit" class="btn btn-outline-primary" value="Filtrar">
+						</p>
+					</fieldset>
+				</form>
+				
+				<form th:if="${employee != null}">
+					<fieldset>
+						<legend>Actualitzaci&oacute;</legend>
+						<p>
+							<label for="name">Nom:</label>
+							<input type="text" id="name" name="name" th:value="${employee?.name}">
+							
+							<label >Feina:</label>
+							<select  name="job">
+								<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}"></option>
+							</select>
+							
+							<input type="submit" class="btn btn-outline-primary" id="update-btn" value="Actualitzar">
+						</p>
+					</fieldset>
+				 </form>
+				 
+				<button type="button" class="btn btn-outline-danger" id="delete-btn" th:if="${employee != null}">Esborrar</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

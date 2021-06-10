@@ -26,6 +26,12 @@ public class Employee {
 	public Employee() {
 	}
 	
+	public Employee(String name, EJob job) {
+		this.name = name;
+		this.job = job.name();
+		this.salary = job.getSalary();
+	}
+	
 	public Employee(int id, String name, String job, double salary) {
 		this.id = id;
 		this.name = name;

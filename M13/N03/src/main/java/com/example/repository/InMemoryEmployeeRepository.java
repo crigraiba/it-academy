@@ -23,12 +23,15 @@ public class InMemoryEmployeeRepository {
 				"Fabiola", "Viviana", "Emily", "Érika"
 			};
 		
-		for (int i = 0; i < names.length/4; i++) {
-			employees.add(new Employee(count++, names[i], EJob.ADVOCAT.name(), EJob.ADVOCAT.getSalary()));
-			employees.add(new Employee(count++, names[i+1], EJob.CAIXER.name(), EJob.CAIXER.getSalary()));
-			employees.add(new Employee(count++, names[i+2], EJob.ENGINYER.name(), EJob.ENGINYER.getSalary()));
-			employees.add(new Employee(count++, names[i+3], EJob.QUÍMIC.name(), EJob.QUÍMIC.getSalary()));
+		for (int i = 0; i < names.length; i++) {
+			employees.add(new Employee(names[i++], EJob.ADVOCAT));
+			employees.add(new Employee(names[i++], EJob.CAIXER));
+			employees.add(new Employee(names[i++], EJob.ENGINYER));
+			employees.add(new Employee(names[i], EJob.QUÍMIC));
 		}
+		
+		for (Employee employee : employees)
+			employee.setId(count++);
 	}
 	
 	// Lectura:
@@ -37,9 +40,9 @@ public class InMemoryEmployeeRepository {
 	}
 	
 	public Employee readById(int id) {
-		for (Employee emp : employees) {
-			if (id == emp.getId())
-				return emp;
+		for (Employee employee : employees) {
+			if (id == employee.getId())
+				return employee;
 		}
 		
 		return null;
@@ -53,17 +56,17 @@ public class InMemoryEmployeeRepository {
 	
 	// Eliminació:
 	public void delete(int id) {
-		Employee emp = this.readById(id);
-		employees.remove(emp);
+		Employee employee = this.readById(id);
+		employees.remove(employee);
 	}
 	
 	// Actualització:
-	public void update(Employee employee) {
-		Employee emp = this.readById(employee.getId());
+	public void update(Employee update) {
+		Employee employee = this.readById(update.getId());
 		
-		emp.setName(employee.getName());
-		emp.setJob(employee.getJob());
-		emp.setSalary(employee.getSalary());
+		employee.setName(update.getName());
+		employee.setJob(update.getJob());
+		employee.setSalary(update.getSalary());
 	}
 	
 	// Filtratge:
