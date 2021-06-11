@@ -1,41 +1,44 @@
 $(document).ready(function () {
-	var url = "http://localhost:8080/employees/";
+	var url = "http://localhost:8080/employees";
 	
-	$(".delete-btn").click(function(event) {
+	$(".delete-btn").click(function (event) {
+		event.preventDefault();
+		
 		var button = $(this);
 		var id = button.attr("data-id");
 		
 		$.ajax({
-			url: url + id,
+			url: url + "/" + id,
 			method: "DELETE",
-			success: function(success) {
+			success: function (success) {
+				location = url;
 			},
-			error: function(error) {
+			error: function (error) {
 				console.log(error);
 			}
 		});
 	});
 	
-	$("#update-form").submit(function(event) {
+	$("#update").submit(function (event) {
 		event.preventDefault();
 		
 		var form = $(this);
-		var id = form.find("input[name='update-id']").val();
-		var name = form.find("input[name='update-name']").val();
-		var job = form.find("select[name='update-job']").val();
+		var id = form.attr("data-id");
+		var name = form.find("input[name='name']").val();
+		var job = form.find("select[name='job']").val();
 		
 		$.ajax({
-			url: url + id,
+			url: url + "/" + id,
 			method: "PUT",
 			data: JSON.stringify({
-				//"id": id,
 				"name": name,
 				"job": job
 			}),
 			contentType: "application/json",
-			succes: function(success) {
+			success: function (success) {
+				location = url + "/" + id;
 			},
-			error: function(error) {
+			error: function (error) {
 				console.log(error);
 			}
 		});

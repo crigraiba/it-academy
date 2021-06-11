@@ -19,15 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 
 import com.example.repository.InMemoryEmployeeRepository;
 import com.example.repository.MySqlJdbcEmployeeRepository;
 import com.example.service.MySqlJpaEmployeeService;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.domain.Employee;
 import com.example.domain.EJob;
 
@@ -44,12 +41,22 @@ public class EmployeeController {
 	// Lectura:
 	@GetMapping
 	public String read(Model model) throws SQLException {
+		model.addAttribute("form", "create");
+		model.addAttribute("method", "post");
+		model.addAttribute("legend", "Nou empleat");
+		model.addAttribute("btn", "Afegir");
+		
 		model.addAttribute("employees", repository.read());
 		return "index";
 	}
 	
 	@GetMapping("/{id}")
 	public String readById(Model model, @PathVariable int id) throws SQLException {
+		model.addAttribute("form", "update");
+		model.addAttribute("method", null);
+		model.addAttribute("legend", "Actualització");
+		model.addAttribute("btn", "Actualitzar");
+		
 		model.addAttribute("employees", repository.read());
 		model.addAttribute("employee", repository.readById(id));
 		return "index";
@@ -86,6 +93,11 @@ public class EmployeeController {
 	// Filtratge:
 	@GetMapping(params = "job")
 	public String filterByJob(Model model, @Valid @RequestParam EJob job) throws SQLException {
+		model.addAttribute("form", "create");
+		model.addAttribute("method", "post");
+		model.addAttribute("legend", "Nou empleat");
+		model.addAttribute("btn", "Afegir");
+		
 		model.addAttribute("employees", repository.filterByJob(job.name()));
 		return "index";
 	}
