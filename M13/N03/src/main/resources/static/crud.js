@@ -1,62 +1,43 @@
 $(document).ready(function () {
-	var url = window.location.href;
+	var url = "http://localhost:8080/employees/";
 	
-	$("#delete-btn").click(function () {
-		//endpoint += "/" + id;
-		//console.log(endpoint);
+	$(".delete-btn").click(function(event) {
+		var button = $(this);
+		var id = button.attr("data-id");
+		
 		$.ajax({
-			url: url,
+			url: url + id,
 			method: "DELETE",
-			success: function () {
-				window.location.href = "/employees";
+			success: function(success) {
 			},
-			error: function (error) {
+			error: function(error) {
 				console.log(error);
 			}
 		});
 	});
 	
-	$("#update-btn").click(function (name, job) {
+	$("#update-form").submit(function(event) {
+		event.preventDefault();
+		
+		var form = $(this);
+		var id = form.find("input[name='update-id']").val();
+		var name = form.find("input[name='update-name']").val();
+		var job = form.find("select[name='update-job']").val();
+		
 		$.ajax({
-			url: url,
+			url: url + id,
 			method: "PUT",
 			data: JSON.stringify({
-					"name": name,
-					"job": job
-				}),
-			success: function () {
-				//window.location.href = "/employees";
+				//"id": id,
+				"name": name,
+				"job": job
+			}),
+			contentType: "application/json",
+			succes: function(success) {
 			},
-			error: function (error) {
+			error: function(error) {
 				console.log(error);
 			}
 		});
 	});
-	
-	/*$("#update-btn").click(function (name, job) {
-		var data = JSON.stringify({
-				"name": name,
-				"job": job
-			});
-	
-		$.ajax({
-			url: url,
-			method: "GET",
-			data: data,
-			success: function (data) {
-				$.ajax({
-					url: url,
-					method: "PUT",
-					data: data,
-					success: function () {
-					},
-					error: function (error) {
-					}
-				});
-			},
-			error: function (error) {
-				console.log(error);
-			}
-		});
-	});*/
 });

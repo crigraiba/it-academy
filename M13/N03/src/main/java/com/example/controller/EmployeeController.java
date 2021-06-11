@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import com.example.repository.InMemoryEmployeeRepository;
 import com.example.repository.MySqlJdbcEmployeeRepository;
 import com.example.service.MySqlJpaEmployeeService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.domain.Employee;
 import com.example.domain.EJob;
 
@@ -72,20 +73,14 @@ public class EmployeeController {
 	// Actualització:
 	@PutMapping("/{id}")
 	@ResponseBody
-	public String update(Model model, @PathVariable int id, @Valid Employee employee) {//Map<String, String> json) throws SQLException {
-		System.out.println(id + " " + employee.getName() + " " + employee.getJob());
-		//System.out.println(id + " " + name + " " + job);
-		//System.out.println(id + " " + json.get("name") + " " + json.get("job"));
-		//new Employee(name, job).setId(id);
-		/*System.out.println(employee.toString());
+	public void update(Model model, @PathVariable int id, @Valid @RequestBody Map<String, String> json) throws SQLException {
+		String name = json.get("name");
+		EJob job = EJob.valueOf(json.get("job"));
 		
+		Employee employee = new Employee(name, job);
 		employee.setId(id);
-		employee.setSalary(EJob.valueOf(employee.getJob()).getSalary());
 		
-		System.out.println(employee.toString());
-		
-		repository.update(employee);*/
-		return "redirect:/employees";
+		repository.update(employee);
 	}
 	
 	// Filtratge:

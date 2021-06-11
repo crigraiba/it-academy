@@ -28,7 +28,7 @@
 							<th scope="col">Nom</th>
 							<th scope="col">Feina</th>
 							<th scope="col">Salari</th>
-							<th scope="col" colspan="1"></th>
+							<th scope="col" colspan="2"></th>
 						</tr>
 					</thead>
 					
@@ -38,11 +38,12 @@
 						</tr>
 						
 						<tr th:each="employee : ${employees}">
-							<th scope="row" th:text="${employee.id}"></th>
+							<th scope="row" id="employee-id" th:text="${employee.id}" th:value="${employee.id}"></th>
 							<td th:text="${employee.name}"></td>
 							<td th:text="${employee.job}"></td>
 							<td th:text="${employee.salary}"></td>
 							<td><a th:href="@{/employees/} + ${employee.id}">Editar</a></td>
+							<td><button type="button" class="btn btn-outline-danger delete-btn" th:data-id="${employee.id}">Esborrar</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -54,8 +55,7 @@
 				</p>
 				
 				<!-- Formularis -->
-				<form th:if="${employee == null}"
-					th:action="@{/employees}" method="post">
+				<form th:if="${employee == null}" method="post">
 					<fieldset>
 						<legend>Nou empleat</legend>
 						<p>
@@ -72,8 +72,7 @@
 					</fieldset>
 				</form>
 				 
-				<form th:if="${employee == null}"
-					th:action="@{/employees}" method="get">
+				<form th:if="${employee == null}" method="get">
 					<fieldset>
 						<legend>Filtratge</legend>
 						<p>
@@ -88,25 +87,26 @@
 					</fieldset>
 				</form>
 				
-				<form th:if="${employee != null}">
+				<form id="update-form" th:if="${employee != null}">
 					<fieldset>
 						<legend>Actualitzaci&oacute;</legend>
 						<p>
+							<input type="text" name="update-id" th:value="${employee?.id}" hidden>
+							
 							<label for="name">Nom:</label>
-							<input type="text" id="name" name="name" th:value="${employee?.name}">
+							<input type="text" id="name" name="update-name" th:value="${employee?.name}">
 							
 							<label >Feina:</label>
-							<select  name="job">
+							<select  name="update-job">
 								<option th:each="job : ${T(com.example.domain.EJob).values()}" th:text="${job}"></option>
 							</select>
 							
-							<button class="btn btn-outline-primary" id="update-btn">Actualitzar</button>
+							<input type="submit" class="btn btn-outline-primary" value="Actualitzar">
+							<!-- <button class="btn btn-outline-primary" id="update-btn">Actualitzar</button> -->
 							<!-- <input type="submit" class="btn btn-outline-primary" id="update-btn" value="Actualitzar">  -->
 						</p>
 					</fieldset>
 				 </form>
-				 
-				<button type="button" class="btn btn-outline-danger" id="delete-btn" th:if="${employee != null}">Esborrar</button>
 			</div>
 		</div>
 	</div>
