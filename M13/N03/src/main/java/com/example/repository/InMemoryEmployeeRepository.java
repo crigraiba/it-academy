@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
@@ -39,13 +40,13 @@ public class InMemoryEmployeeRepository {
 		return employees;
 	}
 	
-	public Employee readById(int id) {
+	public Optional<Employee> readById(int id) {
 		for (Employee employee : employees) {
 			if (id == employee.getId())
-				return employee;
+				return Optional.of(employee);
 		}
 		
-		return null;
+		return Optional.empty();
 	}
 	
 	// Creació:
@@ -56,13 +57,13 @@ public class InMemoryEmployeeRepository {
 	
 	// Eliminació:
 	public void delete(int id) {
-		Employee employee = this.readById(id);
+		Employee employee = this.readById(id).get();
 		employees.remove(employee);
 	}
 	
 	// Actualització:
 	public void update(Employee update) {
-		Employee employee = this.readById(update.getId());
+		Employee employee = this.readById(update.getId()).get();
 		
 		employee.setName(update.getName());
 		employee.setJob(update.getJob());

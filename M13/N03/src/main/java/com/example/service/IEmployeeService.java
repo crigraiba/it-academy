@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.example.domain.Employee;
 
@@ -9,7 +10,7 @@ public interface IEmployeeService {
 	// Lectura:
 	public ArrayList<Employee> read();
 	
-	public Employee readById(int id);
+	public Optional<Employee> readById(int id);
 	
 	// Creació:
 	public void create(Employee employee);

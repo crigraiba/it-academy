@@ -1,86 +1,112 @@
 package com.example.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 
 import com.example.repository.InMemoryEmployeeRepository;
-import com.example.repository.MySqlJdbcEmployeeRepository;
-import com.example.service.MySqlJpaEmployeeService;
+//import com.example.repository.MySqlJdbcEmployeeRepository;
+//import com.example.service.MySqlJpaEmployeeService;
 import com.example.domain.Employee;
+import com.example.controller.exception.EmployeeNotFoundException;
 import com.example.domain.EJob;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8080")//, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/employees")
 public class EmployeeController {
 	
 	InMemoryEmployeeRepository repository = new InMemoryEmployeeRepository();
-	// MySqlJdbcEmployeeRepository repository = new MySqlJdbcEmployeeRepository();
-	// @Autowired
-	// MySqlJpaEmployeeService repository;
+	//MySqlJdbcEmployeeRepository repository = new MySqlJdbcEmployeeRepository();
+	//@Autowired
+	//MySqlJpaEmployeeService repository;
+	
+	private final String
+		STR_FORM = "form",
+		STR_METHOD = "method",
+		STR_LEGEND = "legend",
+		STR_BTN = "btn";
 	
 	// Lectura:
 	@GetMapping
 	public String read(Model model) throws SQLException {
-		model.addAttribute("form", "create");
-		model.addAttribute("method", "post");
-		model.addAttribute("legend", "Nou empleat");
-		model.addAttribute("btn", "Afegir");
+		model.addAttribute(STR_FORM, "create");
+		model.addAttribute(STR_METHOD, "post");
+		model.addAttribute(STR_LEGEND, "Nou empleat");
+		model.addAttribute(STR_BTN, "Afegir");
 		
-		model.addAttribute("employees", repository.read());
+		ArrayList<Employee> employees = repository.read();
+		model.addAttribute("employees", employees);
+		
 		return "index";
 	}
+	/*public ArrayList<Employee> read() throws SQLException {
+		ArrayList<Employee> employees = repository.read();
+		return employees;
+	}*/
 	
 	@GetMapping("/{id}")
 	public String readById(Model model, @PathVariable int id) throws SQLException {
-		model.addAttribute("form", "update");
-		model.addAttribute("method", null);
-		model.addAttribute("legend", "Actualització");
-		model.addAttribute("btn", "Actualitzar");
+		model.addAttribute(STR_FORM, "update");
+		model.addAttribute(STR_METHOD, null);
+		model.addAttribute(STR_LEGEND, "Actualització");
+		model.addAttribute(STR_BTN, "Actualitzar");
 		
 		model.addAttribute("employees", repository.read());
-		model.addAttribute("employee", repository.readById(id));
+		model.addAttribute("employee", repository.readById(id).orElseThrow(() -> new EmployeeNotFoundException(id)));
+
+		model.addAttribute("index");
+		
 		return "index";
 	}
-	// null -> throw new EmployeeNotFoundException(id)
+	/*public Employee readById(@PathVariable int id) throws SQLException {
+		Employee employee = repository.readById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+		return employee;
+	}*/
 	
 	// Creació:
 	@PostMapping
-	public String create(Model model, @Valid @RequestParam String name, @Valid @RequestParam EJob job) throws SQLException {
-		repository.create(new Employee(name, job));
+	public String create(@Valid @RequestParam String name, @Valid @RequestParam EJob job) throws SQLException {
+		Employee employee = new Employee(name, job);
+		
+		repository.create(employee);
+		
 		return "redirect:/employees";
 	}
 	
 	// Eliminació:
 	@DeleteMapping("/{id}")
 	@ResponseBody
-	public void delete(Model model, @PathVariable int id) throws SQLException {
+	public void delete(@PathVariable int id) throws SQLException {
+		// Comprovem que l'empleat existeixi:
+		repository.readById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+		
 		repository.delete(id);
 	}
 	
 	// Actualització:
 	@PutMapping("/{id}")
 	@ResponseBody
-	public void update(Model model, @PathVariable int id, @Valid @RequestBody Map<String, String> json) throws SQLException {
+	public void update(@PathVariable int id, @Valid @RequestBody Map<String, String> json) throws SQLException {
+		// Comprovem que l'empleat existeixi:
+		repository.readById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+		
 		String name = json.get("name");
 		EJob job = EJob.valueOf(json.get("job"));
 		
@@ -93,13 +119,20 @@ public class EmployeeController {
 	// Filtratge:
 	@GetMapping(params = "job")
 	public String filterByJob(Model model, @Valid @RequestParam EJob job) throws SQLException {
-		model.addAttribute("form", "create");
-		model.addAttribute("method", "post");
-		model.addAttribute("legend", "Nou empleat");
-		model.addAttribute("btn", "Afegir");
+		model.addAttribute(STR_FORM, "create");
+		model.addAttribute(STR_METHOD, "post");
+		model.addAttribute(STR_LEGEND, "Nou empleat");
+		model.addAttribute(STR_BTN, "Afegir");
 		
 		model.addAttribute("employees", repository.filterByJob(job.name()));
+
+		model.addAttribute("index");
+		
 		return "index";
 	}
+	/*public String filterByJob(@Valid @RequestParam EJob job) throws SQLException {
+		ArrayList<Employee> employees = repository.filterByJob(job.name());
+		return "index";
+	}*/
 	
 }

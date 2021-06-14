@@ -22,10 +22,10 @@ public class MySqlJpaEmployeeService implements IEmployeeService {
 	}
 	
 	@Override
-	public Employee readById(int id) {
-		Optional<Employee> employee = repository.findById(id);
+	public Optional<Employee> readById(int id) {
+		return repository.findById(id);
 		
-		return employee.get();
+		//return Optional.of(employee);
 	}
 	
 	// Creació:

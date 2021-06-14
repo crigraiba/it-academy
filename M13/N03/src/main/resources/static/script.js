@@ -8,10 +8,10 @@ $(document).ready(function () {
 		var id = button.attr("data-id");
 		
 		$.ajax({
-			url: url + "/" + id,
 			method: "DELETE",
+			url: url + "/" + id,
 			success: function (success) {
-				location = url;
+				window.location.href = url;
 			},
 			error: function (error) {
 				console.log(error);
@@ -28,15 +28,15 @@ $(document).ready(function () {
 		var job = form.find("select[name='job']").val();
 		
 		$.ajax({
-			url: url + "/" + id,
 			method: "PUT",
+			url: url + "/" + id,
 			data: JSON.stringify({
 				"name": name,
 				"job": job
 			}),
 			contentType: "application/json",
 			success: function (success) {
-				location = url + "/" + id;
+				window.location.href = url + "/" + id;
 			},
 			error: function (error) {
 				console.log(error);

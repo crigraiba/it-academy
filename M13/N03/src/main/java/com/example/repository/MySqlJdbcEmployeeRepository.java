@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,12 +16,12 @@ import com.example.domain.Employee;
 @Repository
 public class MySqlJdbcEmployeeRepository {
 
-	private Connection connection;
+	private Connection conn;
 	
 	public MySqlJdbcEmployeeRepository() { // throws ClassNotFoundException, SQLException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // JDBC driver for MySQL (Connector/J)
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", ""); // url, username, password
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", ""); // url, username, password
 		} catch (ClassNotFoundException | SQLException e) {
 			System.out.println("La connexió no ha estat possible.");
 		}
@@ -31,7 +32,7 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "SELECT *"
 			+ " FROM employees";
 		
-		Statement statement = connection.createStatement();
+		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery(query);
 		
 		ArrayList<Employee> employees = new ArrayList<Employee>();
@@ -42,18 +43,18 @@ public class MySqlJdbcEmployeeRepository {
 		return employees;
 	}
 	
-	public Employee readById(int id) throws SQLException {
+	public Optional<Employee> readById(int id) throws SQLException {
 		String query = "SELECT *"
 			+ " FROM employees"
 			+ " WHERE id = " + id;
 		
-		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery(query);
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
 		
-		if (resultSet.next())
-			return new Employee(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4));
-		else
-			return null;
+		if (rs.next())
+			return Optional.of(new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
+		
+		return Optional.empty();
 	}
 	
 	// Creació:
@@ -61,7 +62,7 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "INSERT INTO employees (name, job, salary)"
 			+ " VALUES (?, ?, ?)";
 			
-		PreparedStatement preparedStatement = connection.prepareStatement(query);
+		PreparedStatement preparedStatement = conn.prepareStatement(query);
 		
 		preparedStatement.setString(1, employee.getName());
 		preparedStatement.setString(2, employee.getJob());
@@ -75,7 +76,7 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "DELETE FROM employees"
 			+ " WHERE id = " + id;
 		
-		PreparedStatement preparedStatement = connection.prepareStatement(query);
+		PreparedStatement preparedStatement = conn.prepareStatement(query);
 		
 		preparedStatement.executeUpdate();
 	}
@@ -86,7 +87,7 @@ public class MySqlJdbcEmployeeRepository {
 			+ " SET name = ?, job = ?, salary = ?"
 			+ " WHERE id = ?";
 		
-		PreparedStatement preparedStatement = connection.prepareStatement(query);
+		PreparedStatement preparedStatement = conn.prepareStatement(query);
 		
 		preparedStatement.setString(1, employee.getName());
 		preparedStatement.setString(2, employee.getJob());
@@ -102,7 +103,7 @@ public class MySqlJdbcEmployeeRepository {
 				+ " FROM employees"
 				+ " WHERE job = '" + job + "'";
 		
-		Statement statement = connection.createStatement();
+		Statement statement = conn.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
 		
 		ArrayList<Employee> employees = new ArrayList<>();
