@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{/script.js}"></script>
+    
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>API de REST</title>
+	
+	<style>
+		.container {
+			margin-top: 5em;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1 th:text="${h1}"></h1>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<!-- Taula -->
+				<table class="table table-hover shadow-lg p-3 mb-5 bg-body rounded" th:if="${shops} != null">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col" colspan="1"></th>
+							<th scope="col">Nom</th>
+							<th scope="col">Capacitat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${shops.empty}">
+							<th scope="row" colspan="4">Cap resultat.</th>
+						</tr>
+						<tr th:each="shop : ${shops}">
+							
+							<th scope="row" th:text="${shop.id}"></th>
+							<th scope="row"><a type="button" th:href="@{/shops/} + ${shop.id} + @{/pictures}" class="btn btn-outline-primary bi bi-palette"></a></th>
+							<td th:text="${shop.name}"></td>
+							<td th:text="${shop.capacity}"></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="table shadow-lg p-3 mb-5 bg-body rounded" th:if="${pictures} != null">
+					<thead>
+						<tr>
+							<th scope="col"><a type="button" th:href="@{/shops}" class="btn btn-outline-primary bi bi-shop"></a></th>
+							<th scope="col"><button type="button" class="btn btn-outline-primary bi bi-trash-fill delete-btn" th:data-id="${shop.id}"></button></th>
+							<th scope="col" th:text="'Nom: ' + ${shop.name}"></th>
+							<th scope="col" th:text="'Capacitat: ' + ${shop.capacity}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="4">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th scope="col">ID</th>
+											<th scope="col">Autor</th>
+											<th scope="col">Preu</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${pictures.empty}">
+											<th scope="row" colspan="4">Cap resultat.</th>
+										</tr>
+										<tr th:each="picture : ${pictures}">
+											<th scope="row" th:text="${picture.id}"></th>
+											<td th:text="${picture.author}"></td>
+											<td th:text="${picture.price}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				
+				
+			</div>
+			
+			<div class="col">
+				<!-- Formulari -->
+				<form method="post">
+					<fieldset>
+						<legend th:text="${legend}"></legend>
+						
+						<p>
+							<label th:for="${first}" th:text="${firstText}"></label>
+							<input type="text" th:id="${first}" th:name="${first}">
+						</p>
+						
+						<p>
+							<label th:for="${second}" th:text="${secondText}"></label>
+							<input type="number" th:id="${second}" th:name="${second}" min="0" th:step="${step}">
+						</p>
+						
+						<p>
+							<input type="submit" class="btn btn-primary" value="Afegir">
+						</p>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
