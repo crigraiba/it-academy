@@ -34,6 +34,12 @@ public class Picture {
 	public Picture() {
 	}
 	
+	public Picture(String author, double price, Shop shop) {
+		this.author = author;
+		this.price = price;
+		this.shop = shop;
+	}
+	
 	// Mètodes setter:
 	public void setAuthor(String author) {
 		this.author = author;
