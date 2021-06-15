@@ -18,6 +18,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// MySQL:
 	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	implementation 'mysql:mysql-connector-java:8.0.25'
 }

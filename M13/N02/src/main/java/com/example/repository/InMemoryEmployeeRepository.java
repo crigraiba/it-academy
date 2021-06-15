@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
@@ -12,58 +13,68 @@ import com.example.domain.Employee;
 public class InMemoryEmployeeRepository {
 	
 	private ArrayList<Employee> employees;
+	private int count = 1; // Autoincrement
 	
 	public InMemoryEmployeeRepository() {
 		employees = new ArrayList<Employee>();
 		
-		employees.add(new Employee("Anna", EJob.ADVOCAT));
-		employees.add(new Employee("Ariadna", EJob.CAIXER));
-		employees.add(new Employee("Marta", EJob.ENGINYER));
-		employees.add(new Employee("Cristina", EJob.QUÍMIC));
-		employees.add(new Employee("Gloria", EJob.ADVOCAT));
-		employees.add(new Employee("Zaarai", EJob.CAIXER));
-		employees.add(new Employee("Àliç", EJob.ENGINYER));
-		employees.add(new Employee("Esther", EJob.QUÍMIC));
-		employees.add(new Employee("Fabiola", EJob.ADVOCAT));
-		employees.add(new Employee("Viviana", EJob.CAIXER));
-		employees.add(new Employee("Emily", EJob.ENGINYER));
-		employees.add(new Employee("Érika", EJob.QUÍMIC));
+		String[] names = {
+				"Anna", "Ariadna", "Marta", "Cristina",
+				"Gloria", "Zaarai", "Àliç", "Esther",
+				"Fabiola", "Viviana", "Emily", "Érika"
+			};
+		
+		for (int i = 0; i < names.length; i++) {
+			employees.add(new Employee(names[i++], EJob.ADVOCAT));
+			employees.add(new Employee(names[i++], EJob.CAIXER));
+			employees.add(new Employee(names[i++], EJob.ENGINYER));
+			employees.add(new Employee(names[i], EJob.QUÍMIC));
+		}
+		
+		for (Employee employee : employees)
+			employee.setId(count++);
 	}
 	
+	// Lectura:
 	public ArrayList<Employee> read() {
 		return employees;
 	}
 	
-	public Employee readById(int id) {
-		for (Employee emp : employees) {
-			if (id == emp.getId())
-				return emp;
+	public Optional<Employee> readById(int id) {
+		for (Employee employee : employees) {
+			if (id == employee.getId())
+				return Optional.of(employee);
 		}
 		
-		return null;
+		return Optional.empty();
 	}
 	
+	// Creació:
 	public void create(Employee employee) {
+		employee.setId(count++);
 		employees.add(employee);
 	}
 	
+	// Eliminació:
 	public void delete(int id) {
-		Employee emp = this.readById(id);
-		employees.remove(emp);
+		Employee employee = this.readById(id).get();
+		employees.remove(employee);
 	}
 	
-	public void update(Employee employee) {
-		Employee emp = this.readById(employee.getId());
+	// Actualització:
+	public void update(Employee update) {
+		Employee employee = this.readById(update.getId()).get();
 		
-		emp.setName(employee.getName());
-		emp.setJob(employee.getJob());
-		emp.setSalary(employee.getSalary());
+		employee.setName(update.getName());
+		employee.setJob(update.getJob());
+		employee.setSalary(update.getSalary());
 	}
 	
+	// Filtratge:
 	public ArrayList<Employee> filterByJob(String job) {
 		return employees
 			.stream()
-			.filter(emp -> job == emp.getJob())
+			.filter(employee -> job == employee.getJob())
 			.collect(Collectors.toCollection(ArrayList<Employee>::new));
 	}
 
