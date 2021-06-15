@@ -3,8 +3,8 @@ package com.example.domain;
 public class Employee {
 	
 	private int id;
-	private static int count = 1;
-	private String name, job;
+	private String name;
+	private String job;
 	private double salary;
 	
 	// Mètodes constructors:
@@ -12,10 +12,16 @@ public class Employee {
 	}
 	
 	public Employee(String name, EJob job) {
-		this.id = count++;
 		this.name = name;
 		this.job = job.name();
 		this.salary = job.getSalary();
+	}
+	
+	public Employee(int id, String name, String job, double salary) {
+		this.id = id;
+		this.name = name;
+		this.job = job;
+		this.salary = salary;
 	}
 	
 	// Mètodes setter:
@@ -50,6 +56,12 @@ public class Employee {
 	
 	public double getSalary() {
 		return salary;
+	}
+	
+	// Altres mètodes:
+	@Override
+	public String toString() {
+		return "ID=" + id + ", Nom=" + name + ", Feina=" + job + ", Salari=" + salary;
 	}
 	
 }
