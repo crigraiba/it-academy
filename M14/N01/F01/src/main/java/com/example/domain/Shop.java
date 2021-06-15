@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,11 +20,13 @@ public class Shop {
 	@Column(name = "capacity", nullable = false)
 	private int capacity;
 	
-	/*@OneToMany(mappedBy = "shop")
-	private List<Picture> pictures;*/
-	
-	// Mètodes constructor:
+	// Mètode constructor:
 	public Shop() {
+	}
+
+	public Shop(String name, int capacity) {
+		this.name = name;
+		this.capacity = capacity;
 	}
 	
 	// Mètodes setter:

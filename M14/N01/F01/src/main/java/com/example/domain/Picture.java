@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.domain;
 
 import java.time.LocalDate;
 
@@ -23,15 +23,21 @@ public class Picture {
 	private String author;
 	@Column(name = "price", nullable = false)
 	private double price;
-	@Column(name = "date", insertable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
+	@Column(name = "datetime", insertable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
 	private LocalDate date;
 	
 	@ManyToOne(optional = false) // Clau forana:
 	@JoinColumn(name = "shop_id", referencedColumnName = "id")
 	private Shop shop;
 	
-	// Mètodes constructor:
+	// Mètode constructor:
 	public Picture() {
+	}
+	
+	public Picture(String author, double price, Shop shop) {
+		this.author = author;
+		this.price = price;
+		this.shop = shop;
 	}
 	
 	// Mètodes setter:
