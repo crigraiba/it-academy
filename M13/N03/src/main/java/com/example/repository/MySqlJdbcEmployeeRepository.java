@@ -18,7 +18,7 @@ public class MySqlJdbcEmployeeRepository {
 
 	private Connection conn;
 	
-	public MySqlJdbcEmployeeRepository() { // throws ClassNotFoundException, SQLException {
+	public MySqlJdbcEmployeeRepository() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // JDBC driver for MySQL (Connector/J)
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees", "root", ""); // url, username, password
@@ -32,8 +32,8 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "SELECT *"
 			+ " FROM employees";
 		
-		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery(query);
+		Statement s = conn.createStatement();
+		ResultSet rs = s.executeQuery(query);
 		
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		
@@ -48,8 +48,8 @@ public class MySqlJdbcEmployeeRepository {
 			+ " FROM employees"
 			+ " WHERE id = " + id;
 		
-		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery(query);
+		Statement s = conn.createStatement();
+		ResultSet rs = s.executeQuery(query);
 		
 		if (rs.next())
 			return Optional.of(new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
@@ -62,13 +62,13 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "INSERT INTO employees (name, job, salary)"
 			+ " VALUES (?, ?, ?)";
 			
-		PreparedStatement preparedStatement = conn.prepareStatement(query);
+		PreparedStatement ps = conn.prepareStatement(query);
 		
-		preparedStatement.setString(1, employee.getName());
-		preparedStatement.setString(2, employee.getJob());
-		preparedStatement.setDouble(3, employee.getSalary());
+		ps.setString(1, employee.getName());
+		ps.setString(2, employee.getJob());
+		ps.setDouble(3, employee.getSalary());
 		
-		preparedStatement.executeUpdate();
+		ps.executeUpdate();
 	}
 	
 	// Eliminació:
@@ -76,9 +76,9 @@ public class MySqlJdbcEmployeeRepository {
 		String query = "DELETE FROM employees"
 			+ " WHERE id = " + id;
 		
-		PreparedStatement preparedStatement = conn.prepareStatement(query);
+		PreparedStatement ps = conn.prepareStatement(query);
 		
-		preparedStatement.executeUpdate();
+		ps.executeUpdate();
 	}
 	
 	// Actualització:
@@ -87,14 +87,14 @@ public class MySqlJdbcEmployeeRepository {
 			+ " SET name = ?, job = ?, salary = ?"
 			+ " WHERE id = ?";
 		
-		PreparedStatement preparedStatement = conn.prepareStatement(query);
+		PreparedStatement ps = conn.prepareStatement(query);
 		
-		preparedStatement.setString(1, employee.getName());
-		preparedStatement.setString(2, employee.getJob());
-		preparedStatement.setDouble(3, employee.getSalary());
-		preparedStatement.setInt(4, employee.getId());
+		ps.setString(1, employee.getName());
+		ps.setString(2, employee.getJob());
+		ps.setDouble(3, employee.getSalary());
+		ps.setInt(4, employee.getId());
 		
-		preparedStatement.executeUpdate();
+		ps.executeUpdate();
 	}
 	
 	// Filtratge:
@@ -103,13 +103,13 @@ public class MySqlJdbcEmployeeRepository {
 				+ " FROM employees"
 				+ " WHERE job = '" + job + "'";
 		
-		Statement statement = conn.createStatement();
-		ResultSet resultSet = statement.executeQuery(query);
+		Statement s = conn.createStatement();
+		ResultSet rs = s.executeQuery(query);
 		
 		ArrayList<Employee> employees = new ArrayList<>();
 		
-		while (resultSet.next())
-			employees.add(new Employee(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDouble(4)));
+		while (rs.next())
+			employees.add(new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
 		
 		return employees;
 	}

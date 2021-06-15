@@ -24,8 +24,8 @@ import com.example.repository.InMemoryEmployeeRepository;
 //import com.example.repository.MySqlJdbcEmployeeRepository;
 //import com.example.service.MySqlJpaEmployeeService;
 import com.example.domain.Employee;
-import com.example.controller.exception.EmployeeNotFoundException;
 import com.example.domain.EJob;
+import com.example.controller.exception.EmployeeNotFoundException;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:8080")
@@ -56,10 +56,6 @@ public class EmployeeController {
 		
 		return "index";
 	}
-	/*public ArrayList<Employee> read() throws SQLException {
-		ArrayList<Employee> employees = repository.read();
-		return employees;
-	}*/
 	
 	@GetMapping("/{id}")
 	public String readById(Model model, @PathVariable int id) throws SQLException {
@@ -75,10 +71,6 @@ public class EmployeeController {
 		
 		return "index";
 	}
-	/*public Employee readById(@PathVariable int id) throws SQLException {
-		Employee employee = repository.readById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
-		return employee;
-	}*/
 	
 	// Creació:
 	@PostMapping
@@ -130,9 +122,5 @@ public class EmployeeController {
 		
 		return "index";
 	}
-	/*public String filterByJob(@Valid @RequestParam EJob job) throws SQLException {
-		ArrayList<Employee> employees = repository.filterByJob(job.name());
-		return "index";
-	}*/
 	
 }
