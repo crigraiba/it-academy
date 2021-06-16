@@ -14,6 +14,12 @@ public class GlobalControllerAdvice {
 		return e.getClass().getSimpleName() + ": " + e.getMessage();
 	}
 	
+	@ExceptionHandler(value = ShopCapacityReachedException.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST) // 400
+	public String handleException(ShopCapacityReachedException e) {
+		return e.getClass().getSimpleName() + ": " + e.getMessage();
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String handleException(Exception e) {
 		return e.getClass().getSimpleName() + ": " + e.getMessage();

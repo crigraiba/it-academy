@@ -37,7 +37,6 @@ public class ShopRestController {
 		
 		return "index";
 	}
-
 	
 	@PostMapping
 	public String create(@RequestParam String name, @RequestParam int capacity) {

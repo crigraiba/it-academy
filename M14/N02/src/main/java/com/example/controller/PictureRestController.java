@@ -19,6 +19,7 @@ import com.example.repository.IPictureRepository;
 import com.example.domain.Picture;
 import com.example.domain.Shop;
 import com.example.controller.exception.ResourceNotFoundException;
+import com.example.controller.exception.ShopCapacityReachedException;
 
 @Controller
 @RequestMapping("/shops/{id}/pictures")
@@ -48,14 +49,22 @@ public class PictureRestController {
 	}
 	
 	@PostMapping
-	//@Transactional
+	@Transactional
 	public String create(@PathVariable int id, @RequestParam String author, @RequestParam double price) {
+		// Comprovem que la botiga existeixi:
 		Shop shop = shopRepository
 			.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("botiga", id));
 		
-		Picture picture = new Picture(author, price, shop);
-		pictureRepository.save(picture);
+		// Comprovem que no s'hagi assolit la capacitat de la botiga:
+		ArrayList<Picture> pictures = (ArrayList<Picture>) pictureRepository.findAllByShopId(id);
+		
+		if (shop.getCapacity() == pictures.size())
+			throw new ShopCapacityReachedException();
+		else {
+			Picture picture = new Picture(author, price, shop);
+			pictureRepository.save(picture);
+		}
 		
 		return "redirect:/shops/" + id + "/pictures";
 	}
