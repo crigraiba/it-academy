@@ -1,0 +1,18 @@
+-- Creació de les taules:
+DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS players;
+
+CREATE TABLE players (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(30) UNIQUE,
+	datetime DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE games (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	dice1 INT NOT NULL,
+	dice2 INT NOT NULL,
+	player_id INT NOT NULL,
+	FOREIGN KEY (player_id)
+		REFERENCES players(id)
+);
