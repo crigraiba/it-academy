@@ -1,9 +1,6 @@
 package com.example.controller;
 
-import java.util.stream.Collectors;
 import java.util.List;
-import java.util.Optional;
-import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
-import com.example.repository.IPlayerRepository;
+import com.example.service.PlayerService;
 import com.example.domain.Player;
 
 @RestController
@@ -22,17 +21,17 @@ import com.example.domain.Player;
 public class PlayerRestController {
 	
 	@Autowired
-	IPlayerRepository repository;
+	PlayerService playerService;
 	
 	// Lectura:
 	/**
-	 * Retorna una llista de tots els jugadors.
+	 * Retorna una llista de jugadors.
 	 * @return Llista de jugadors.
 	 */
 	
 	@GetMapping
 	public List<Player> read() {
-		return repository.findAll();
+		return playerService.read();
 	}
 	
 	// Creació:
@@ -42,8 +41,9 @@ public class PlayerRestController {
 	 */
 	
 	@PostMapping
-	public void create(@RequestParam Player player) {
-		repository.save(player);
+	@ResponseStatus(HttpStatus.CREATED)
+	public void create(@RequestBody Player player) {
+		playerService.create(player);
 	}
 	
 	// Actualització:
@@ -54,49 +54,9 @@ public class PlayerRestController {
 	 */
 	
 	@PutMapping("/{id}")
-	public void update(@RequestParam String id, @RequestBody Player player) {
+	public void update(@PathVariable int id, @RequestBody Player player) {
 		player.setId(id);
-		repository.save(player);
-	}
-	
-	/**
-	 * Retorna una llista de tots els jugadors ordenats de forma descendent
-	 * en funció del seu percentatge d'èxit.
-	 * @return Llista ordenada de jugadors.
-	 */
-	
-	@GetMapping("/ranking")
-	public List<Player> readRanking() {
-		List<Player> players = repository.findAll()
-			.stream()
-			.sorted(Comparator.comparing(Player::getName)) // TODO
-			.collect(Collectors.toList());
-		
-		return players;
-	}
-	
-	/**
-	 * Retorna el jugador amb pitjor percentatge d'èxit.
-	 * @return Jugador amb pitjor percentatge d'èxit.
-	 */
-	
-	@GetMapping("/ranking/loser")
-	public Optional<Player> readLoser() {
-		return repository.findAll()
-				.stream()
-				.min(Comparator.comparing(Player::getName)); // TODO
-	}
-	
-	/**
-	 * Retorna el jugador amb millor percentatge d'èxit.
-	 * @return Jugador amb millor percentatge d'èxit.
-	 */
-	
-	@GetMapping("/ranking/winner")
-	public Optional<Player> readWinner() {
-		return repository.findAll()
-			.stream()
-			.max(Comparator.comparing(Player::getName)); // TODO
+		playerService.update(player);
 	}
 	
 }

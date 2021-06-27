@@ -43,6 +43,10 @@ public class Game {
 		this.dice2 = dice2;
 	}
 	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
 	// Mètodes getter:
 	public String getId() {
 		return id;
@@ -54,6 +58,17 @@ public class Game {
 	
 	public int getDice2() {
 		return dice2;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public boolean getIsWon() {
+		if ((dice1 + dice2) == 7)
+			return true; // Victòria
+		else
+			return false; // Derrota
 	}
 	
 }

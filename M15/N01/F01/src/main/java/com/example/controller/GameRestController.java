@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,17 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
-import com.example.repository.IGameRepository;
+import com.example.service.PlayerService;
+import com.example.service.GameService;
+import com.example.domain.Player;
 import com.example.domain.Game;
+import com.example.controller.exception.PlayerNotFoundException;
 
 @RestController
 @RequestMapping("/players/{id}/games")
 public class GameRestController {
-	
+
 	@Autowired
-	IGameRepository repository;
+	PlayerService playerService;
+	@Autowired
+	GameService gameService;
 	
 	// Lectura:
 	/**
@@ -29,8 +35,12 @@ public class GameRestController {
 	 */
 	
 	@GetMapping
-	public ArrayList<Game> read(@PathVariable String id) {
-		return repository.findAllByPlayerId(id);
+	public List<Game> readByPlayerId(@PathVariable int id) {
+		// Comprovem que el jugador existeixi:
+		playerService.readById(id)
+			.orElseThrow(() -> new PlayerNotFoundException(id));
+		
+		return gameService.readByPlayerId(id);
 	}
 	
 	// Creació:
@@ -41,9 +51,16 @@ public class GameRestController {
 	 */
 	
 	@PostMapping
-	public void create(@PathVariable String id, @RequestParam Game game) {
-		game.setId(id);
-		repository.save(game);
+	@ResponseStatus(HttpStatus.CREATED)
+	public void create(@PathVariable int id) {
+		// Comprovem que el jugador existeixi:
+		Player player = playerService.readById(id)
+			.orElseThrow(() -> new PlayerNotFoundException(id));
+		
+		Game game = new Game();
+		game.setPlayer(player);
+		
+		gameService.create(game);
 	}
 	
 	// Eliminació:
@@ -53,8 +70,12 @@ public class GameRestController {
 	 */
 	
 	@DeleteMapping
-	public void delete(@PathVariable String id) {
-		repository.deleteAll(repository.findAllByPlayerId(id));
+	public void deleteByPlayerId(@PathVariable int id) {
+		// Comprovem que el jugador existeixi:
+		playerService.readById(id)
+			.orElseThrow(() -> new PlayerNotFoundException(id));
+		
+		gameService.deleteByPlayerId(id);
 	}
 	
 }
